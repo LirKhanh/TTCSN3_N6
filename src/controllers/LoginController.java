@@ -1,6 +1,5 @@
 package controllers;
 
-import models.Staff;
 import views.LoginUI;
 import java.sql.*;
 import views.admin.MenuAdminUI;
@@ -45,6 +44,7 @@ public class LoginController {
                     MenuAdminUI adminUI = new MenuAdminUI();
                     adminUI.setVisible(true);
                     view.setVisible(false);
+                    System.out.println("checkLogin");
                 } else {
                     MenuSellerUI menuSellerUI = new MenuSellerUI();
                     menuSellerUI.setVisible(true);

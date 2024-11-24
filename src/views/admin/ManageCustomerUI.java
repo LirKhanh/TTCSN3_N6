@@ -1,13 +1,15 @@
+
 package views.admin;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class ManageColorUI extends JFrame {
-    private MenuAdminUI menuAd;
 
-    public ManageColorUI(MenuAdminUI menuAd) {
+public class ManageCustomerUI extends JFrame {
+        private MenuAdminUI menuAd;
+
+    public ManageCustomerUI(MenuAdminUI menuAd) {
         this.menuAd = menuAd;
 
         setTitle("Manage Color");

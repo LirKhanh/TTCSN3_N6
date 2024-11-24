@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/NetsBeanProject/TTCSN/src/models/Staff.java</file>
-            <file>file:/D:/NetsBeanProject/TTCSN/src/views/seller/MenuSellerUI.java</file>
-            <file>file:/D:/NetsBeanProject/TTCSN/src/controllers/LoginController.java</file>
-            <file>file:/D:/NetsBeanProject/TTCSN/src/models/Color.java</file>
-            <file>file:/D:/NetsBeanProject/TTCSN/src/main/Main.java</file>
-            <file>file:/D:/NetsBeanProject/TTCSN/src/views/admin/ManageColorUI.java</file>
-            <file>file:/D:/NetsBeanProject/TTCSN/src/views/LoginUI.java</file>
-            <file>file:/D:/NetsBeanProject/TTCSN/src/views/admin/MenuAdminUI.java</file>
+            <file>file:/D:/TTCSN/TTCSN3_N6/src/views/seller/ManageCustomerUI.java</file>
+            <file>file:/D:/TTCSN/TTCSN3_N6/src/controllers/seller/ManageCustomerController.java</file>
+            <file>file:/D:/TTCSN/TTCSN3_N6/src/views/admin/ManageColorUI.java</file>
+            <file>file:/D:/TTCSN/TTCSN3_N6/src/controllers/seller/MenuSellerController.java</file>
+            <file>file:/D:/TTCSN/TTCSN3_N6/src/views/seller/MenuSellerUI.java</file>
         </group>
     </open-files>
 </project-private>
