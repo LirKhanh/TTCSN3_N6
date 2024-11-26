@@ -24,7 +24,7 @@ public class MenuSellerController {
 
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fs?autoReconnect=true&useSSL=false",
-                    "root", "123456abc!");
+                    "root", "1234");
         } catch (SQLException e) {
             e.printStackTrace();
         }

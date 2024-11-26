@@ -2,7 +2,6 @@
   <library name="TTCSN">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/dist/TTCSN.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../jars/mysql-connector-j-9.0.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
