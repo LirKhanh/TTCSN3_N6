@@ -10,7 +10,7 @@ public class ManageColorUI extends JFrame {
     public ManageColorUI(MenuAdminUI menuAd) {
         this.menuAd = menuAd;
 
-        setTitle("Manage Color");
+        setTitle("Manage Customer");
         setSize(400, 300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

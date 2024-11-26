@@ -64,6 +64,15 @@ public class Staff {
     public void setPass(String pass) {
         this.pass = pass;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Staff{" +
+                "staffId='" + staffId + '\'' +
+                ", staffName='" + staffName + '\'' +
+                ", stat=" + stat +
+                ", acc='" + acc + '\'' +
+                ", pass='" + pass + '\'' +
+                '}';
+    }
 }
