@@ -72,8 +72,6 @@ public class ManageCustomerUI extends JFrame {
         // Handle window close event
         addWindowListener(new WindowCloseListener());
         ManageCustomerController controller = new ManageCustomerController(this);
-        
-        updateCustomerButtonListener(e -> controller.updateCustomer());
     }
     
 
@@ -120,13 +118,5 @@ public class ManageCustomerUI extends JFrame {
     public JTable getTable() {
       return table;  // Trả về đối tượng JTable
     }
-    
-    public void updateCustomerDetails(String cus_name, String cus_phone, String address) {
-        int selectedRow = table.getSelectedRow();
-        if (selectedRow != -1 ) {
-            table.setValueAt(cus_name, selectedRow, 1);
-            table.setValueAt(cus_phone, selectedRow, 2);
-            table.setValueAt(address, selectedRow, 3);
-        }
-    }
+
 }

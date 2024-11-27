@@ -19,10 +19,18 @@ public class ManageCustomerController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        this.view.updateCustomerButtonListener(e -> updateCustomer());
         this.view.addCustomerButtonListener(e -> addCustomer());
         loadCustomers();
     }
-
+    public void updateCustomerDetails(String cus_name, String cus_phone, String address) {
+        int selectedRow = view.getTable().getSelectedRow();
+        if (selectedRow != -1 ) {
+            view.getTable().setValueAt(cus_name, selectedRow, 1);
+            view.getTable().setValueAt(cus_phone, selectedRow, 2);
+            view.getTable().setValueAt(address, selectedRow, 3);
+        }
+    }
     private void loadCustomers() {
         PreparedStatement stmt = null;
         ResultSet rs = null;
