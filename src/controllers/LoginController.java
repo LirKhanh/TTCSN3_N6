@@ -1,7 +1,10 @@
 package controllers;
 
+import Utils.ConnectJDBCUtil;
 import views.LoginUI;
+
 import java.sql.*;
+
 import views.admin.MenuAdminUI;
 import views.seller.MenuSellerUI;
 
@@ -14,9 +17,8 @@ public class LoginController {
         this.view = view;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fs?autoReconnect=true&useSSL=false",
-                    "root", "");
-        } catch (SQLException e) {
+            connection = ConnectJDBCUtil.getConnection();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

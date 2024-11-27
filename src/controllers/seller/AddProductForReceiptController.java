@@ -1,5 +1,6 @@
 package controllers.seller;
 
+import Utils.ConnectJDBCUtil;
 import views.seller.AddProductForReceiptUI;
 import views.seller.CreateReceiptUI;
 
@@ -17,9 +18,8 @@ public class AddProductForReceiptController {
         this.view = view;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fs?autoReconnect=true&useSSL=false",
-                    "root", "");
-        } catch (SQLException e) {
+            connection = ConnectJDBCUtil.getConnection();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

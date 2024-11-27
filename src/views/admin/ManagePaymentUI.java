@@ -1,36 +1,40 @@
+
 package views.admin;
 
-import java.awt.Label;
-import java.awt.ScrollPane;
-import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class ManageColorUI extends JFrame {
-    private MenuAdminUI menuAd;
+public class ManagePaymentUI extends JFrame{
+        private MenuAdminUI menuAd;
     
-    private JLabel lblMaMau, lblTenMau;
-    private JTextField jtfMaMau,jtfTenMau;
-    private JButton btnThem,btnSua,btnXoa,btnNhapLai;
-    private JTable table;
-    private DefaultTableModel tableModel;
-    private JScrollPane scrollPane;
-    
-    public ManageColorUI(MenuAdminUI menuAd) {
+        private JLabel lblMaPayment, lblTenPayment;
+        private JTextField jtfMaPayment,jtfTenPayment;
+        private JButton btnThem,btnSua,btnXoa,btnNhapLai;
+        private JTable table;
+        private DefaultTableModel tableModel;
+        private JScrollPane scrollPane;
+        
+        public ManagePaymentUI(MenuAdminUI menuAd) {
         this.menuAd = menuAd;
 
-        setTitle("Manage Color");
+        setTitle("Manage Payment Methods");
         setSize(600, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(null);
 
-        lblMaMau= new JLabel("Mã màu: ");
-        lblTenMau=new JLabel("Tên màu: ");
+        lblMaPayment= new JLabel("Mã phương thức thanh toán: ");
+        lblTenPayment=new JLabel("Tên phương thức thanh toán: ");
        
-        jtfMaMau=new JTextField();
-        jtfTenMau=new JTextField();
+        jtfMaPayment=new JTextField();
+        jtfTenPayment=new JTextField();
         
         btnThem=new JButton("Thêm");
         btnSua=new JButton("Sửa");
@@ -39,11 +43,11 @@ public class ManageColorUI extends JFrame {
         
                
         
-        lblMaMau.setBounds(50, 50, 100, 30);
-        lblTenMau.setBounds(50, 100,100,30);
+        lblMaPayment.setBounds(50, 50, 100, 30);
+        lblTenPayment.setBounds(50, 100,100,30);
         
-        jtfMaMau.setBounds(150, 50,200,30);
-        jtfTenMau.setBounds(150, 100,200,30);
+        jtfMaPayment.setBounds(150, 50,200,30);
+        jtfTenPayment.setBounds(150, 100,200,30);
         
         btnThem.setBounds(50,150,100,30);
         btnSua.setBounds(180,150,100,30);
@@ -57,7 +61,7 @@ public class ManageColorUI extends JFrame {
         scrollPane.setViewportView(table);
         
         String []name= {
-            "Mã màu", "Tên màu"
+            "Mã phương thức thanh toán", "Tên phương thức thanh toán "
         };
         tableModel=new DefaultTableModel(name ,0);
         table.setModel(tableModel);
@@ -67,10 +71,10 @@ public class ManageColorUI extends JFrame {
         
 //        jtfMaMau.setBounds(50, )
         
-        add(lblMaMau);
-        add(lblTenMau);
-        add(jtfMaMau);
-        add(jtfTenMau);
+        add(lblMaPayment);
+        add(lblTenPayment);
+        add(jtfMaPayment);
+        add(jtfTenPayment);
         add(btnThem);
         add(btnSua);
         add(btnXoa);
@@ -86,4 +90,6 @@ public class ManageColorUI extends JFrame {
             menuAd.setVisible(true); 
         }
     }
+        
+        
 }

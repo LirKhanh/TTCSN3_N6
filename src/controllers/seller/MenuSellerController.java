@@ -2,14 +2,9 @@ package controllers.seller;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
-import models.Size;
-import models.Color;
-import models.Color_Size_Product;
-import models.Product;
-import models.Type;
-import models.Sale;
-import models.Sale_Product;
 import javax.swing.table.DefaultTableModel;
+
+import Utils.ConnectJDBCUtil;
 import views.seller.CreateReceiptUI;
 import views.seller.ManageCustomerUI;
 import views.seller.MenuSellerUI;
@@ -23,9 +18,8 @@ public class MenuSellerController {
         this.view = view;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fs?autoReconnect=true&useSSL=false",
-                    "root", "1234");
-        } catch (SQLException e) {
+            connection = ConnectJDBCUtil.getConnection();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         this.view.addCreateReceiptListener(e -> createNewRecipt());
