@@ -36,7 +36,7 @@ public class ManageCustomerUI extends JFrame {
         btnUpdateCustomer = new JButton("Cập nhật thông tin khách hàng");
         btnUpdateCustomer.setBounds(180, 20, 140, 50);
         add(btnUpdateCustomer);
-
+        
         lblName = new JLabel("Tên khách hàng:");
         lblName.setBounds(340, 20, 100, 25);
         add(lblName);
@@ -72,7 +72,10 @@ public class ManageCustomerUI extends JFrame {
         // Handle window close event
         addWindowListener(new WindowCloseListener());
         ManageCustomerController controller = new ManageCustomerController(this);
+        
+        updateCustomerButtonListener(e -> controller.updateCustomer());
     }
+    
 
     private class WindowCloseListener extends WindowAdapter {
         @Override
@@ -88,6 +91,11 @@ public class ManageCustomerUI extends JFrame {
         btnAddCustomer.addActionListener(addCustomerButton);
     }
 
+    //Add listener for "Cập nhật thông tin khách hàng" button
+    public void updateCustomerButtonListener(ActionListener updateCustomerButton) {
+        btnUpdateCustomer.addActionListener(updateCustomerButton);
+    }
+    
     // Getters for form inputs and table model
     public JButton getBtnAddCustomer() {
         return btnAddCustomer;
@@ -107,5 +115,18 @@ public class ManageCustomerUI extends JFrame {
 
     public DefaultTableModel getTableModel() {
         return (DefaultTableModel) table.getModel();
+    }
+    
+    public JTable getTable() {
+      return table;  // Trả về đối tượng JTable
+    }
+    
+    public void updateCustomerDetails(String cus_name, String cus_phone, String address) {
+        int selectedRow = table.getSelectedRow();
+        if (selectedRow != -1 ) {
+            table.setValueAt(cus_name, selectedRow, 1);
+            table.setValueAt(cus_phone, selectedRow, 2);
+            table.setValueAt(address, selectedRow, 3);
+        }
     }
 }

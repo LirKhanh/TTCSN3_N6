@@ -20,7 +20,7 @@ public class CreateReceiptController {
         this.view = view;
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fs?autoReconnect=true&useSSL=false",
-                    "root", "1234");
+                    "root", "");
         } catch (SQLException e) {
             e.printStackTrace();
         }
