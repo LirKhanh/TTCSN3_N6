@@ -93,7 +93,7 @@ public class ManageCustomerUI extends JFrame {
     public void updateCustomerButtonListener(ActionListener updateCustomerButton) {
         btnUpdateCustomer.addActionListener(updateCustomerButton);
     }
-    
+  
     // Getters for form inputs and table model
     public JButton getBtnAddCustomer() {
         return btnAddCustomer;

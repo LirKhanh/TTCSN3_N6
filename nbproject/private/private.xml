@@ -3,12 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp64/www/TTCSN3_N6/src/controllers/seller/ManageCustomerController.java</file>
-            <file>file:/C:/wamp64/www/TTCSN3_N6/src/views/seller/ManageCustomerUI.java</file>
-            <file>file:/C:/wamp64/www/TTCSN3_N6/src/views/LoginUI.java</file>
-            <file>file:/C:/wamp64/www/TTCSN3_N6/src/models/Customer.java</file>
-            <file>file:/C:/wamp64/www/TTCSN3_N6/src/main/Main.java</file>
-            <file>file:/C:/wamp64/www/TTCSN3_N6/src/models/Sale.java</file>
+            <file>file:/C:/Users/PC/Documents/Zalo%20Received%20Files/TTCSN3_N6/TTCSN3_N6/src/views/admin/ManageStaffUI.java</file>
+            <file>file:/C:/Users/PC/Documents/Zalo%20Received%20Files/TTCSN3_N6/TTCSN3_N6/src/main/Main.java</file>
+            <file>file:/C:/Users/PC/Documents/Zalo%20Received%20Files/TTCSN3_N6/TTCSN3_N6/src/controllers/seller/MenuSellerController.java</file>
+            <file>file:/C:/Users/PC/Documents/Zalo%20Received%20Files/TTCSN3_N6/TTCSN3_N6/src/Utils/ConnectJDBCUtil.java</file>
+            <file>file:/C:/Users/PC/Documents/Zalo%20Received%20Files/TTCSN3_N6/TTCSN3_N6/src/controllers/admin/ManageStaffController.java</file>
+            <file>file:/C:/Users/PC/Documents/Zalo%20Received%20Files/TTCSN3_N6/TTCSN3_N6/src/controllers/admin/MenuAdminController.java</file>
+            <file>file:/C:/Users/PC/Documents/Zalo%20Received%20Files/TTCSN3_N6/TTCSN3_N6/src/controllers/seller/ManageCustomerController.java</file>
+            <file>file:/C:/Users/PC/Documents/Zalo%20Received%20Files/TTCSN3_N6/TTCSN3_N6/src/views/seller/MenuSellerUI.java</file>
+            <file>file:/C:/Users/PC/Documents/Zalo%20Received%20Files/TTCSN3_N6/TTCSN3_N6/src/views/LoginUI.java</file>
+            <file>file:/C:/Users/PC/Documents/Zalo%20Received%20Files/TTCSN3_N6/TTCSN3_N6/src/controllers/LoginController.java</file>
+            <file>file:/C:/Users/PC/Documents/Zalo%20Received%20Files/TTCSN3_N6/TTCSN3_N6/src/views/admin/MenuAdminUI.java</file>
+            <file>file:/C:/Users/PC/Documents/Zalo%20Received%20Files/TTCSN3_N6/TTCSN3_N6/src/views/seller/ManageCustomerUI.java</file>
         </group>
     </open-files>
 </project-private>

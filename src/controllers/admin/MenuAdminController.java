@@ -1,5 +1,6 @@
 package controllers.admin;
 
+import Utils.ConnectJDBCUtil;
 import java.sql.*;
 import views.admin.ManageCategoryUI;
 import views.admin.ManageColorUI;
@@ -14,14 +15,18 @@ import views.admin.MenuAdminUI;
 public class MenuAdminController {
 
     private MenuAdminUI view;
+    private Connection connection;
 
     public MenuAdminController(MenuAdminUI view) {
         this.view = view;
+        connection= ConnectJDBCUtil.getConnection();
+        
         this.view.addManageColorListener(e -> moveManageColor());
         this.view.addManageCustomerListener(e -> moveManageCustomer());
         this.view.addManageSizeListener(e -> moveManageSize());
         this.view.addManageCategoryListener(e -> moveManageCategory());
         this.view.addManageStaffListener(e -> moveManageStaff());
+        
         this.view.addManagePaymentListener(e -> moveManagePayment());
         this.view.addManageDiscountListener(e -> moveManageDiscount());
         this.view.addManageSupplierListener(e -> moveManageSupplier());

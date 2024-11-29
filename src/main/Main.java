@@ -10,5 +10,6 @@ public class Main {
         LoginUI loginView = new LoginUI();
         LoginController loginController = new LoginController(loginView);
         loginView.setVisible(true);
+        
     }
 }

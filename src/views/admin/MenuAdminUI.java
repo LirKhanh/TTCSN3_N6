@@ -11,7 +11,7 @@ public class MenuAdminUI extends JFrame {
         setTitle("ADMIN Menu");
         setSize(450, 600);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLayout(null);
         

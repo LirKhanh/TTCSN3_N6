@@ -1,5 +1,6 @@
 package views;
 
+import Utils.SetIconUtil;
 import javax.swing.*;
 
 public class LoginUI extends JFrame {
@@ -15,7 +16,10 @@ public class LoginUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLayout(null);
-
+    
+        //ImageIcon icon= new ImageIcon("src/Utils/logo.jpg") ;
+        setIconImage(SetIconUtil.getIcon().getImage());
+        
         lblUsername = new JLabel("Username:");
         lblUsername.setBounds(50, 50, 100, 25);
         add(lblUsername);

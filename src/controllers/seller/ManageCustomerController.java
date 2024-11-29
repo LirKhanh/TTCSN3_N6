@@ -23,14 +23,7 @@ public class ManageCustomerController {
         this.view.addCustomerButtonListener(e -> addCustomer());
         loadCustomers();
     }
-    public void updateCustomerDetails(String cus_name, String cus_phone, String address) {
-        int selectedRow = view.getTable().getSelectedRow();
-        if (selectedRow != -1 ) {
-            view.getTable().setValueAt(cus_name, selectedRow, 1);
-            view.getTable().setValueAt(cus_phone, selectedRow, 2);
-            view.getTable().setValueAt(address, selectedRow, 3);
-        }
-    }
+
     private void loadCustomers() {
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -98,48 +91,48 @@ public class ManageCustomerController {
             }
         }
     }
-    
+
     public void updateCustomer() {
-       String name = view.getTxtName().getText();
-       String phone = view.getTxtPhone().getText();
-       String address = view.getTxtAddress().getText();
+        String name = view.getTxtName().getText();
+        String phone = view.getTxtPhone().getText();
+        String address = view.getTxtAddress().getText();
 
-       if (name.isEmpty() || phone.isEmpty() || address.isEmpty()) {
-           JOptionPane.showMessageDialog(view, "Vui lòng nhập đầy đủ thông tin!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-           return;
-       }
+        if (name.isEmpty() || phone.isEmpty() || address.isEmpty()) {
+            JOptionPane.showMessageDialog(view, "Vui lòng nhập đầy đủ thông tin!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-       // Lấy ID của khách hàng cần cập nhật từ bảng
-       int selectedRow = view.getTable().getSelectedRow(); // Sử dụng getTable() để lấy JTable
-       if (selectedRow == -1) {
-           JOptionPane.showMessageDialog(view, "Vui lòng chọn một khách hàng để cập nhật!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-           return;
-       }
-       String customerId = view.getTable().getValueAt(selectedRow, 0).toString(); // Lấy ID của khách hàng đã chọn
+        // Lấy ID của khách hàng cần cập nhật từ bảng
+        int selectedRow = view.getTable().getSelectedRow(); // Sử dụng getTable() để lấy JTable
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(view, "Vui lòng chọn một khách hàng để cập nhật!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String customerId = view.getTable().getValueAt(selectedRow, 0).toString(); // Lấy ID của khách hàng đã chọn
 
-       PreparedStatement stmt = null;
-       try {
-           String query = "UPDATE KH SET cus_name = ?, cus_phone = ?, address = ? WHERE cus_id = ?";
-           stmt = connection.prepareStatement(query);
-           stmt.setString(1, name);
-           stmt.setString(2, phone);
-           stmt.setString(3, address);
-           stmt.setString(4, customerId); // Gửi ID khách hàng để xác định bản ghi cần cập nhật
+        PreparedStatement stmt = null;
+        try {
+            String query = "UPDATE KH SET cus_name = ?, cus_phone = ?, address = ? WHERE cus_id = ?";
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, name);
+            stmt.setString(2, phone);
+            stmt.setString(3, address);
+            stmt.setString(4, customerId); // Gửi ID khách hàng để xác định bản ghi cần cập nhật
 
-           int rowsUpdated = stmt.executeUpdate();
-           if (rowsUpdated > 0) {
-               JOptionPane.showMessageDialog(view, "Cập nhật khách hàng thành công!");
-               loadCustomers(); // Tải lại danh sách khách hàng sau khi cập nhật
-           }
-       } catch (SQLException e) {
-           e.printStackTrace();
-           JOptionPane.showMessageDialog(view, "Lỗi khi cập nhật khách hàng!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-       } finally {
-           try {
-               if (stmt != null) stmt.close();
-           } catch (SQLException e) {
-               e.printStackTrace();
-           }
-       }
-   }
+            int rowsUpdated = stmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(view, "Cập nhật khách hàng thành công!");
+                loadCustomers(); // Tải lại danh sách khách hàng sau khi cập nhật
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(view, "Lỗi khi cập nhật khách hàng!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

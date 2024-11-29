@@ -1,6 +1,8 @@
 
 package views.admin;
 
+import controllers.admin.ManageStaffController;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JButton;
@@ -10,13 +12,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 public class ManageStaffUI extends JFrame{
         private MenuAdminUI menuAd;
         
-        private JLabel lblMaNhanVien, lblTenNhanVien,lblTaiKhoan,lblMatKhau;
-        private JTextField jtfMaNhanVien,jtfTenNhanVien,jtfTaiKhoan,jtfMatKhau;
-        private JButton btnThem,btnSua,btnXoa,btnNhapLai;
+        private JLabel lblMaNhanVien, lblTenNhanVien,lblTaiKhoan,lblMatKhau ,lblStatNhanVien;
+        private JTextField jtfMaNhanVien,jtfTenNhanVien,jtfTaiKhoan,jtfMatKhau,jtfStat;
+        private JButton btnAddStaff,btnUpdateStaff,btnDeleteStaff,btnRe_enter;
         private JTable table;
         private DefaultTableModel tableModel;
         private JScrollPane scrollPane;
@@ -30,69 +33,73 @@ public class ManageStaffUI extends JFrame{
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(null);
 
-        lblMaNhanVien= new JLabel("Mã nhân viên: ");
-        lblTenNhanVien=new JLabel("Tên nhân viên: ");
+        lblTenNhanVien= new JLabel("Tên nhân viên: ");
+        lblStatNhanVien=new JLabel("Vai trò: ");
         lblTaiKhoan=new JLabel("Tài khoản: ");
         lblMatKhau=new JLabel("Mật khẩu: ");
         
-        jtfMaNhanVien=new JTextField();
         jtfTenNhanVien=new JTextField();
+        jtfStat=new JTextField();
         jtfTaiKhoan=new JTextField();
         jtfMatKhau=new JTextField(); 
         
-        btnThem=new JButton("Thêm");
-        btnSua=new JButton("Sửa");
-        btnXoa=new JButton("Xóa");
-        btnNhapLai=new JButton("Nhập lại");
+        btnAddStaff=new JButton("Thêm");
+        btnUpdateStaff=new JButton("Sửa");
+        btnDeleteStaff=new JButton("Xóa");
+        btnRe_enter=new JButton("Nhập lại");
         
                
-        lblMaNhanVien.setBounds(50, 50, 100, 30);
-        lblTenNhanVien.setBounds(50, 100,100,30);
+        lblTenNhanVien.setBounds(50, 50, 100, 30);
+        lblStatNhanVien.setBounds(50, 100,100,30);
         lblTaiKhoan.setBounds(50,150,100,30);
         lblMatKhau.setBounds(50,200,100,30);
         
         
-        jtfMaNhanVien.setBounds(150, 50,200,30);
-        jtfTenNhanVien.setBounds(150, 100,200,30);
+        jtfTenNhanVien.setBounds(150, 50,200,30);
+        jtfStat.setBounds(150, 100,200,30);
         jtfTaiKhoan.setBounds(150,150,200,30);
         jtfMatKhau.setBounds(150,200,200,30);
         
         
-        btnThem.setBounds(50,300,100,30);
-        btnSua.setBounds(180,300,100,30);
-        btnXoa.setBounds(310,300,100,30);
-        btnNhapLai.setBounds(440,300,100,30);
+        btnAddStaff.setBounds(50,250,100,30);
+        btnUpdateStaff.setBounds(180,250,100,30);
+        btnDeleteStaff.setBounds(310,250,100,30);
+        btnRe_enter.setBounds(440,250,100,30);
         
         scrollPane= new JScrollPane();
-        scrollPane.setBounds(20,350,700,200);
+        scrollPane.setBounds(20,300,700,200);
         table=new JTable();
         scrollPane.add(table);
         scrollPane.setViewportView(table);
         
         String []name= {
-            "Mã nhân viên", "Tên nhân viên","Tài khoản","Mật khẩu"
+            "Mã nhân viên","Tên nhân viên", "Vai trò","Tài khoản","Mật khẩu"
         };
         tableModel=new DefaultTableModel(name ,0);
         table.setModel(tableModel);
         
+        // không cho phép chỉnh sửa dữ liệu trên bảng
+        table.setDefaultEditor(Object.class, null);
       
        
         
-        add(lblMaNhanVien);
         add(lblTenNhanVien);
+        add(lblStatNhanVien);
         add(lblTaiKhoan);
         add(lblMatKhau);
-        add(jtfMaNhanVien);
+        add(jtfStat);
         add(jtfTenNhanVien);
         add(jtfTaiKhoan);
         add(jtfMatKhau);
-        add(btnThem);
-        add(btnSua);
-        add(btnXoa);
-        add(btnNhapLai);
+        add(btnAddStaff);
+        add(btnUpdateStaff);
+        add(btnDeleteStaff);
+        add(btnRe_enter);
         add(scrollPane);
 
+        
         addWindowListener(new WindowCloseListener());
+        ManageStaffController controller= new ManageStaffController(this);
     }
 
     private class WindowCloseListener extends WindowAdapter {
@@ -100,5 +107,51 @@ public class ManageStaffUI extends JFrame{
         public void windowClosed(WindowEvent e) {
             menuAd.setVisible(true); 
         }
+    }
+    
+    // Add listener for "Tạo nhân viên mới" button
+    public void addStaffButtonListener(ActionListener addStaffButton) {
+        btnAddStaff.addActionListener(addStaffButton);
+    }
+
+    //Add listener for "Cập nhật thông tin nhân viên" button
+    public void updateStaffButtonListener(ActionListener updateStaffButton) {
+        btnUpdateStaff.addActionListener(updateStaffButton);
+    }
+    
+    public void deleteStaffButtonListener(ActionListener deleteStaffButton) {
+        btnDeleteStaff.addActionListener(deleteStaffButton);
+    }
+    
+    public void re_enterStaffButtonListener(ActionListener deleteStaffButton) {
+        btnRe_enter.addActionListener(deleteStaffButton);
+    }
+    // Getters for form inputs and table model
+    public JButton getBtnAddCustomer() {
+        return btnAddStaff;
+    }
+
+    public JTextField getTxtName() {
+        return jtfTenNhanVien;
+    }
+
+    public JTextField getTxtStat() {
+        return jtfStat;
+    }
+    
+    public JTextField getTxtAccount() {
+        return jtfTaiKhoan;
+    }
+    
+    public JTextField getTxtPassword() {
+        return jtfMatKhau;
+    }
+
+    public DefaultTableModel getTableModel() {
+        return (DefaultTableModel) table.getModel();
+    }
+    
+    public JTable getTable() {
+      return table;  // Trả về đối tượng JTable
     }
 }
