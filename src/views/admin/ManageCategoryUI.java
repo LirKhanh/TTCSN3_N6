@@ -1,93 +1,108 @@
-
 package views.admin;
 
+import Utils.SetIconUtil;
+import controllers.admin.ManageCategoryController;
+import controllers.admin.ManageColorController;
+
+import javax.swing.*;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class ManageCategoryUI extends JFrame {
         private MenuAdminUI menuAd;
-    
-        private JLabel lblMaLoaiHang, lblTenLoaiHang;
-        private JTextField jtfMaLoaiHang,jtfTenLoaiHang;
-        private JButton btnThem,btnSua,btnXoa,btnNhapLai;
+
+        private JLabel lblTen;
+        private JTextField jtfTen;
+        private JButton btnThem, btnSua, btnXoa, btnNhapLai;
         private JTable table;
         private DefaultTableModel tableModel;
         private JScrollPane scrollPane;
-        
+
         public ManageCategoryUI(MenuAdminUI menuAd) {
-        this.menuAd = menuAd;
+                this.menuAd = menuAd;
 
-        setTitle("Manage Category");
-        setSize(600, 500);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLayout(null);
+                setTitle("Quản lý loại hàng");
+                setSize(600, 500);
+                setLocationRelativeTo(null);
+                setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                setLayout(null);
+                setIconImage(SetIconUtil.getIcon().getImage());
 
-        lblMaLoaiHang= new JLabel("Mã loại hàng: ");
-        lblTenLoaiHang=new JLabel("Tên loại hàng: ");
-       
-        jtfMaLoaiHang=new JTextField();
-        jtfTenLoaiHang=new JTextField();
-        
-        btnThem=new JButton("Thêm");
-        btnSua=new JButton("Sửa");
-        btnXoa=new JButton("Xóa");
-        btnNhapLai=new JButton("Nhập lại");
-        
-               
-        
-        lblMaLoaiHang.setBounds(50, 50, 100, 30);
-        lblTenLoaiHang.setBounds(50, 100,100,30);
-        
-        jtfMaLoaiHang.setBounds(150, 50,200,30);
-        jtfTenLoaiHang.setBounds(150, 100,200,30);
-        
-        btnThem.setBounds(50,150,100,30);
-        btnSua.setBounds(180,150,100,30);
-        btnXoa.setBounds(310,150,100,30);
-        btnNhapLai.setBounds(440,150,100,30);
-        
-        scrollPane= new JScrollPane();
-        scrollPane.setBounds(20,200,450,200);
-        table=new JTable();
-        scrollPane.add(table);
-        scrollPane.setViewportView(table);
-        
-        String []name= {
-            "Mã loại hàng", "Tên loại hàng"
-        };
-        tableModel=new DefaultTableModel(name ,0);
-        table.setModel(tableModel);
-        
-        
-        
-        
-//        jtfMaMau.setBounds(50, )
-        
-        add(lblMaLoaiHang);
-        add(lblTenLoaiHang);
-        add(jtfMaLoaiHang);
-        add(jtfTenLoaiHang);
-        add(btnThem);
-        add(btnSua);
-        add(btnXoa);
-        add(btnNhapLai);
-        add(scrollPane);
+                lblTen = new JLabel("Tên loại hàng: ");
+                lblTen.setBounds(20, 50, 100, 30);
 
-        addWindowListener(new WindowCloseListener());
-    }
+                jtfTen = new JTextField();
+                jtfTen.setBounds(120, 50, 200, 30);
 
-    private class WindowCloseListener extends WindowAdapter {
-        @Override
-        public void windowClosed(WindowEvent e) {
-            menuAd.setVisible(true); 
+                btnThem = new JButton("Thêm");
+                btnSua = new JButton("Sửa");
+                btnXoa = new JButton("Xóa");
+                btnNhapLai = new JButton("Nhập lại");
+
+
+                btnThem.setBounds(20, 150, 100, 30);
+                btnSua.setBounds(150, 150, 100, 30);
+                btnXoa.setBounds(280, 150, 100, 30);
+                btnNhapLai.setBounds(410, 150, 100, 30);
+                btnNhapLai.addActionListener(e -> {
+                        jtfTen.setText("");
+                });
+
+                scrollPane = new JScrollPane();
+                scrollPane.setBounds(20, 200, 550, 220);
+                table = new JTable();
+                scrollPane.add(table);
+                scrollPane.setViewportView(table);
+
+                String[] name = {
+                        "Mã loại hàng", "Tên loài hàng"
+                };
+                tableModel = new DefaultTableModel(name, 0);
+                table.setModel(tableModel);
+
+                add(lblTen);
+                add(jtfTen);
+                add(btnThem);
+                add(btnSua);
+                add(btnXoa);
+                add(btnNhapLai);
+                add(scrollPane);
+
+                addWindowListener(new WindowCloseListener());
+                ManageCategoryController controller = new ManageCategoryController(this);
         }
-    }
+
+        private class WindowCloseListener extends WindowAdapter {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                        menuAd.setVisible(true);
+                }
+        }
+
+        public void addButtonListener(ActionListener addButton) {
+                btnThem.addActionListener(addButton);
+        }
+
+        public void updateButtonListener(ActionListener updateButton) {
+                btnSua.addActionListener(updateButton);
+        }
+
+        public void delButtonListener(ActionListener delButton) {
+                btnXoa.addActionListener(delButton);
+        }
+
+        public JTextField getTxtName() {
+                return jtfTen;
+        }
+
+        public DefaultTableModel getTableModel() {
+                return (DefaultTableModel) table.getModel();
+        }
+
+        public JTable getTable() {
+                return table;
+        }
 }
+

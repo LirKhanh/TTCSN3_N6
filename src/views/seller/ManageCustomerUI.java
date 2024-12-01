@@ -36,7 +36,7 @@ public class ManageCustomerUI extends JFrame {
         btnUpdateCustomer = new JButton("Cập nhật thông tin khách hàng");
         btnUpdateCustomer.setBounds(180, 20, 140, 50);
         add(btnUpdateCustomer);
-        
+
         lblName = new JLabel("Tên khách hàng:");
         lblName.setBounds(340, 20, 100, 25);
         add(lblName);
@@ -73,7 +73,7 @@ public class ManageCustomerUI extends JFrame {
         addWindowListener(new WindowCloseListener());
         ManageCustomerController controller = new ManageCustomerController(this);
     }
-    
+
 
     private class WindowCloseListener extends WindowAdapter {
         @Override
@@ -93,7 +93,7 @@ public class ManageCustomerUI extends JFrame {
     public void updateCustomerButtonListener(ActionListener updateCustomerButton) {
         btnUpdateCustomer.addActionListener(updateCustomerButton);
     }
-  
+
     // Getters for form inputs and table model
     public JButton getBtnAddCustomer() {
         return btnAddCustomer;
@@ -114,9 +114,9 @@ public class ManageCustomerUI extends JFrame {
     public DefaultTableModel getTableModel() {
         return (DefaultTableModel) table.getModel();
     }
-    
+
     public JTable getTable() {
-      return table;  // Trả về đối tượng JTable
+        return table;  // Trả về đối tượng JTable
     }
 
 }

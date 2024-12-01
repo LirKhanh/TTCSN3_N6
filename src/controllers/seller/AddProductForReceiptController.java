@@ -34,7 +34,6 @@ public class AddProductForReceiptController {
             public void mouseClicked(MouseEvent e) {
                 int selectedRow = table.getSelectedRow();
                 if (selectedRow != -1) {
-                    // Lấy dữ liệu từng cột từ dòng được chọn
                     String maHMS = table.getValueAt(selectedRow, 0).toString();
                     String tenSP = table.getValueAt(selectedRow, 1).toString();
                     String mau = table.getValueAt(selectedRow, 2).toString();
@@ -43,7 +42,6 @@ public class AddProductForReceiptController {
                     String gia = table.getValueAt(selectedRow, 6).toString();
                     String soLuong = table.getValueAt(selectedRow, 7).toString();
 
-                    // Hiển thị dữ liệu dòng được chọn
                     String purQuantity = JOptionPane.showInputDialog(
                             view,
                             "Mã HMS: " + maHMS + "\n" +

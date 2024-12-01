@@ -16,8 +16,6 @@ public class LoginUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLayout(null);
-    
-        //ImageIcon icon= new ImageIcon("src/Utils/logo.jpg") ;
         setIconImage(SetIconUtil.getIcon().getImage());
         
         lblUsername = new JLabel("Username:");
