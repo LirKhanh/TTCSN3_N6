@@ -15,8 +15,8 @@ import javax.swing.table.DefaultTableModel;
 public class ManageCustomerUI extends JFrame {
         private MenuAdminUI menuAd;
         
-        private JLabel lblMaKhachHang, lblTenKhachHang,lblDiaChi,lblSDT,lblDiemThanThiet;
-        private JTextField jtfMaKhachHang,jtfTenKhachHang,jtfDiaChi,jtfSDT,jtfDiemThanThiet;
+        private JLabel lblTenKhachHang,lblDiaChi,lblSDT;
+        private JTextField jtfTenKhachHang,jtfDiaChi,jtfSDT;
         private JButton btnThem,btnSua,btnXoa,btnNhapLai;
         private JTable table;
         private DefaultTableModel tableModel;
@@ -32,17 +32,13 @@ public class ManageCustomerUI extends JFrame {
         setIconImage(SetIconUtil.getIcon().getImage());
         setLayout(null);
 
-        lblMaKhachHang= new JLabel("Mã khách hàng: ");
         lblTenKhachHang=new JLabel("Tên khách hàng: ");
         lblSDT=new JLabel("Số điện thoại: ");
         lblDiaChi=new JLabel("Địa chỉ: ");
-        lblDiemThanThiet=new JLabel("Điểm thân thiết: ");
        
-        jtfMaKhachHang=new JTextField();
         jtfTenKhachHang=new JTextField();
         jtfSDT=new JTextField();
         jtfDiaChi=new JTextField();
-        jtfDiemThanThiet=new JTextField();
         
         
         
@@ -53,19 +49,14 @@ public class ManageCustomerUI extends JFrame {
         
                
         
-        lblMaKhachHang.setBounds(50, 50, 100, 30);
         lblTenKhachHang.setBounds(50, 100,100,30);
         lblSDT.setBounds(50,150,100,30);
         lblDiaChi.setBounds(50,200,100,30);
-        lblDiemThanThiet.setBounds(50,250,100,30);
-        
-        
-        jtfMaKhachHang.setBounds(150, 50,200,30);
+
+
         jtfTenKhachHang.setBounds(150, 100,200,30);
         jtfSDT.setBounds(150,150,200,30);
         jtfDiaChi.setBounds(150,200,200,30);
-        jtfDiemThanThiet.setBounds(150,250,200,30);
-        
         
         btnThem.setBounds(50,300,100,30);
         btnSua.setBounds(180,300,100,30);
@@ -89,16 +80,12 @@ public class ManageCustomerUI extends JFrame {
         
 //        jtfMaMau.setBounds(50, )
         
-        add(lblMaKhachHang);
         add(lblTenKhachHang);
         add(lblSDT);
         add(lblDiaChi);
-        add(lblDiemThanThiet);
-        add(jtfMaKhachHang);
         add(jtfTenKhachHang);
         add(jtfSDT);
         add(jtfDiaChi);
-        add(jtfDiemThanThiet);
         add(btnThem);
         add(btnSua);
         add(btnXoa);
@@ -140,18 +127,10 @@ public class ManageCustomerUI extends JFrame {
         return jtfTenKhachHang;
     }
 
-    public JTextField getTxtID() {
-        return jtfMaKhachHang;
-    }
-
     public JTextField getTxtAddress() {return jtfDiaChi;}
 
     public JTextField getTxtPhone() {
         return jtfSDT;
-    }
-
-    public JTextField getTxtPoint() {
-        return jtfDiemThanThiet;
     }
 
     public DefaultTableModel getTableModel() {

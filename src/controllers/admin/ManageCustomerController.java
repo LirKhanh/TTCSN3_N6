@@ -58,35 +58,20 @@ public class ManageCustomerController {
 
     private void addStaff() {
         String name = view.getTxtName().getText();
-        String id = view.getTxtID().getText();
         String ad = view.getTxtAddress().getText();
         String ph =view.getTxtPhone().getText();
-        String po =view.getTxtPoint().getText();
-        if (name.isEmpty() || id.isEmpty() || ph.isEmpty() || ad.isEmpty() || po.isEmpty()) {
+        if (name.isEmpty() || ph.isEmpty() || ad.isEmpty()) {
             JOptionPane.showMessageDialog(view, "Vui lòng nhập đầy đủ thông tin!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        int rowCount = view.getTable().getRowCount();
-        for (int i=0; i< rowCount ; i++)
-        {
-            Object value=view.getTable().getValueAt(i, 2);
-
-            if (id.equals(value.toString()))
-            {
-                JOptionPane.showMessageDialog(view, "Không được trùng tên ID !", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-        }
-
         PreparedStatement stmt = null;
         try {
-            String query = "INSERT INTO KH (cus_name,cus_phone, address, fs_point) VALUES (?,?, ?, ?)";
+            String query = "INSERT INTO KH (cus_name,cus_phone, address) VALUES (?,?, ?)";
             stmt = connection.prepareStatement(query);
             stmt.setString(1, name);
             stmt.setString(2, ph);
             stmt.setString(3, ad);
-            stmt.setString(4, po);
 
             int rowsInserted = stmt.executeUpdate();
             if (rowsInserted > 0) {
@@ -107,29 +92,16 @@ public class ManageCustomerController {
 
     public void updateStaff() {
         String name = view.getTxtName().getText();
-        String id = view.getTxtID().getText();
         String ad = view.getTxtAddress().getText();
         String ph =view.getTxtPhone().getText();
-        String po =view.getTxtPoint().getText();
 
-        if (name.isEmpty() || id.isEmpty() || ph.isEmpty() || ad.isEmpty() || po.isEmpty()) {
+        if (name.isEmpty() ||  ph.isEmpty() || ad.isEmpty()) {
             JOptionPane.showMessageDialog(view, "Vui lòng nhập đầy đủ thông tin!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        int rowCount = view.getTable().getRowCount();
-        for (int i=0; i< rowCount ; i++)
-        {
-            Object value=view.getTable().getValueAt(i, 2);
-
-            if (id.equals(value.toString()))
-            {
-                JOptionPane.showMessageDialog(view, "Không được trùng tên ID !", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-        }
         // Lấy ID của khách hàng cần cập nhật từ bảng
-        int selectedRow = view.getTable().getSelectedRow(); // Sử dụng getTable() để lấy JTable
+        int selectedRow = view.getTable().getSelectedRow();
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(view, "Vui lòng chọn khach hang để cập nhật!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
@@ -138,17 +110,17 @@ public class ManageCustomerController {
 
         PreparedStatement stmt = null;
         try {
-            String query = "UPDATE KH SET cus_name = ?, cus_phone=?, address = ?, fs_point = ? WHERE cus_id = ?";
+            String query = "UPDATE KH SET cus_name = ?, cus_phone=?, address = ? WHERE cus_id = ?";
             stmt = connection.prepareStatement(query);
             stmt.setString(1, name);
             stmt.setString(2, ph);
             stmt.setString(3, ad);
-            stmt.setString(4, po); // Gửi ID nhân viên để xác định bản ghi cần cập nhật
+            stmt.setString(4,CusId);
 
             int rowsUpdated = stmt.executeUpdate();
             if (rowsUpdated > 0) {
                 JOptionPane.showMessageDialog(view, "Cập nhật nhân viên thành công!");
-                loadCus(); // Tải lại danh sách nhân viên sau khi cập nhật
+                loadCus();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -198,6 +170,5 @@ public class ManageCustomerController {
         view.getTxtName().setText("");
         view.getTxtPhone().setText("");
         view.getTxtAddress().setText("");
-        view.getTxtPoint().setText("");
     }
 }
