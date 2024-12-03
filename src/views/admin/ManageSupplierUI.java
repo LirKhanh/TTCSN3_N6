@@ -1,6 +1,8 @@
 
 package views.admin;
 
+import Utils.SetIconUtil;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JButton;
@@ -24,10 +26,11 @@ public class ManageSupplierUI extends JFrame{
         public ManageSupplierUI(MenuAdminUI menuAd) {
             this.menuAd = menuAd;
 
-            setTitle("Manage Supplier");
+            setTitle("Quản lý nhà cung cấp");
             setSize(600, 500);
             setLocationRelativeTo(null);
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            setIconImage(SetIconUtil.getIcon().getImage());
             setLayout(null);
 
             lblMaNhaCungCap= new JLabel("Mã nhà cung cấp: ");

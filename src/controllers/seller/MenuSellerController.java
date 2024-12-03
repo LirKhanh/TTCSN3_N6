@@ -30,13 +30,11 @@ public class MenuSellerController {
     private void createNewRecipt() {
         CreateReceiptUI newCreateReceipt = new CreateReceiptUI(view);
         newCreateReceipt.setVisible(true);
-        view.setVisible(false);
     }
 
     private void moveManageCustomer() {
         ManageCustomerUI newManageCustomer = new ManageCustomerUI(view);
         newManageCustomer.setVisible(true);
-        view.setVisible(false);
     }
 
     private void loadSearchData() {
