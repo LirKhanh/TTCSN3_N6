@@ -2,6 +2,7 @@
 package views.admin;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.table.DefaultTableModel;
@@ -107,5 +108,51 @@ public class ManageCustomerUI extends JFrame {
         public void windowClosed(WindowEvent e) {
             menuAd.setVisible(true); 
         }
+    }
+    public void addCusButtonListener(ActionListener addStaffButton) {
+        btnThem.addActionListener(addStaffButton);
+    }
+
+    //Add listener for "Cập nhật thông tin nhân viên" button
+    public void updateCusButtonListener(ActionListener updateStaffButton) {
+        btnSua.addActionListener(updateStaffButton);
+    }
+
+    public void deleteCusButtonListener(ActionListener deleteStaffButton) {
+        btnXoa.addActionListener(deleteStaffButton);
+    }
+
+    public void re_enterCusButtonListener(ActionListener deleteStaffButton) {
+        btnNhapLai.addActionListener(deleteStaffButton);
+    }
+    // Getters for form inputs and table model
+    public JButton getBtnAddCustomer() {
+        return btnThem;
+    }
+
+    public JTextField getTxtName() {
+        return jtfTenKhachHang;
+    }
+
+    public JTextField getTxtID() {
+        return jtfMaKhachHang;
+    }
+
+    public JTextField getTxtAddress() {return jtfDiaChi;}
+
+    public JTextField getTxtPhone() {
+        return jtfSDT;
+    }
+
+    public JTextField getTxtPoint() {
+        return jtfDiemThanThiet;
+    }
+
+    public DefaultTableModel getTableModel() {
+        return (DefaultTableModel) table.getModel();
+    }
+
+    public JTable getTable() {
+        return table;  // Trả về đối tượng JTable
     }
 }
