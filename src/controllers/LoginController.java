@@ -2,9 +2,7 @@ package controllers;
 
 import Utils.ConnectJDBCUtil;
 import views.LoginUI;
-
 import java.sql.*;
-
 import views.admin.MenuAdminUI;
 import views.seller.MenuSellerUI;
 
@@ -21,15 +19,14 @@ public class LoginController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         this.view.addLoginListener(e -> checkLogin());
+        addKeyListenerForLogin();
     }
 
     private void checkLogin() {
         String username = view.getUsername();
         String password = view.getPassword();
 
-        // Kiểm tra đăng nhập
         String query = "SELECT * FROM NV WHERE acc = ? AND pass = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, username);
@@ -37,7 +34,6 @@ public class LoginController {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                // Nếu đăng nhập thành công
                 String staffId = rs.getString("staff_id");
                 String staffName = rs.getString("staff_name");
                 boolean stat = rs.getBoolean("stat");
@@ -46,7 +42,6 @@ public class LoginController {
                     MenuAdminUI adminUI = new MenuAdminUI();
                     adminUI.setVisible(true);
                     view.setVisible(false);
-                    
                 } else {
                     MenuSellerUI menuSellerUI = new MenuSellerUI();
                     menuSellerUI.setVisible(true);
@@ -59,5 +54,32 @@ public class LoginController {
             e.printStackTrace();
             view.setMessage("Error: " + e.getMessage());
         }
+    }
+
+    private void addKeyListenerForLogin() {
+        view.getTxtUsername().addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent e) {
+                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    performLogin();
+                }
+            }
+        });
+
+        view.getTxtPassword().addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent e) {
+                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    performLogin();
+                }
+            }
+        });
+    }
+
+    private void performLogin() {
+        String username = view.getUsername();
+        String password = view.getPassword();
+
+        checkLogin();
     }
 }

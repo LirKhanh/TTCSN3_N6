@@ -3,6 +3,8 @@ package views.seller;
 import java.awt.BorderLayout;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import Utils.SetIconUtil;
 import controllers.seller.MenuSellerController;
 
 public class MenuSellerUI extends JFrame {
@@ -15,13 +17,14 @@ public class MenuSellerUI extends JFrame {
     private JTable table;
 
     public MenuSellerUI() {        
-        setTitle("Seller Menu");
+        setTitle("Menu Bán hàng");
         setSize(800, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
+        setIconImage(SetIconUtil.getIcon().getImage());
         setLayout(null);
-        
+
         lblSearch = new JLabel("Từ khóa:");
         lblSearch.setBounds(20, 90, 70, 25);
         add(lblSearch);

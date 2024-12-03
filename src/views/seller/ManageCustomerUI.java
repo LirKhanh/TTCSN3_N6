@@ -1,5 +1,6 @@
 package views.seller;
 
+import Utils.SetIconUtil;
 import controllers.seller.ManageCustomerController;
 
 import javax.swing.*;
@@ -26,9 +27,9 @@ public class ManageCustomerUI extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
+        setIconImage(SetIconUtil.getIcon().getImage());
         setLayout(null);
 
-        // Buttons and Labels for customer details
         btnAddCustomer = new JButton("Tạo khách hàng mới");
         btnAddCustomer.setBounds(20, 20, 140, 50);
         add(btnAddCustomer);
@@ -84,17 +85,13 @@ public class ManageCustomerUI extends JFrame {
         }
     }
 
-    // Add listener for "Tạo khách hàng mới" button
     public void addCustomerButtonListener(ActionListener addCustomerButton) {
         btnAddCustomer.addActionListener(addCustomerButton);
     }
 
-    //Add listener for "Cập nhật thông tin khách hàng" button
     public void updateCustomerButtonListener(ActionListener updateCustomerButton) {
         btnUpdateCustomer.addActionListener(updateCustomerButton);
     }
-
-    // Getters for form inputs and table model
     public JButton getBtnAddCustomer() {
         return btnAddCustomer;
     }
@@ -116,7 +113,7 @@ public class ManageCustomerUI extends JFrame {
     }
 
     public JTable getTable() {
-        return table;  // Trả về đối tượng JTable
+        return table;
     }
 
 }

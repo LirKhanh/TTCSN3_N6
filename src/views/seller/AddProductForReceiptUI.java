@@ -1,12 +1,13 @@
 package views.seller;
 
+import Utils.SetIconUtil;
 import controllers.seller.AddProductForReceiptController;
-import views.admin.ManageCustomerUI;
+import controllers.seller.CreateReceiptController;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -27,6 +28,7 @@ public class AddProductForReceiptUI extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
+        setIconImage(SetIconUtil.getIcon().getImage());
         setLayout(null);
 
         lblSearch = new JLabel("Từ khóa:");
@@ -42,7 +44,7 @@ public class AddProductForReceiptUI extends JFrame {
         add(txtSearch);
 
         String[] columnNames = {
-                "Mã HMS", "Tên sản phẩm", "Màu", "Size", "Loại","Đợt giảm giá",
+                "Mã HMS", "Tên sản phẩm", "Màu", "Size", "Loại", "Đợt giảm giá",
                 "Giá", "Số lượng", "Nhà cung cấp", "Vị trí"
         };
         model = new DefaultTableModel(columnNames, 0);
@@ -62,7 +64,7 @@ public class AddProductForReceiptUI extends JFrame {
         }
     }
 
-    public void addSearchListener(java.awt.event.ActionListener searchButton) {
+    public void addSearchListener(ActionListener searchButton) {
         btnSearchProduct.addActionListener(searchButton);
     }
 
@@ -78,6 +80,6 @@ public class AddProductForReceiptUI extends JFrame {
         return table;
     }
 
-
+    public CreateReceiptUI getReceiptUI() {return receiptUI;}
 }
 

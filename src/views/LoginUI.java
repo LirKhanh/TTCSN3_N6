@@ -2,6 +2,8 @@ package views;
 
 import Utils.SetIconUtil;
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class LoginUI extends JFrame {
     private JTextField txtUsername;
@@ -42,8 +44,14 @@ public class LoginUI extends JFrame {
         lblMessage.setBounds(50, 200, 300, 25);
         add(lblMessage);
     }
+    public JTextField getTxtUsername() {
+        return txtUsername;
+    }
 
-    // Getters for view components
+    public JPasswordField getTxtPassword() {
+        return txtPassword;
+    }
+
     public String getUsername() {
         return txtUsername.getText();
     }

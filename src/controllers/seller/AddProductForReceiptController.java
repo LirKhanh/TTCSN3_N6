@@ -3,6 +3,7 @@ package controllers.seller;
 import Utils.ConnectJDBCUtil;
 import views.seller.AddProductForReceiptUI;
 import views.seller.CreateReceiptUI;
+import views.seller.MenuSellerUI;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -84,7 +85,21 @@ public class AddProductForReceiptController {
                                 pstmt.setInt(4, enteredQuantity);
                                 pstmt.executeUpdate();
                                 JOptionPane.showMessageDialog(view, "Thêm sản phẩm vào hóa đơn thành công!");
+                                CreateReceiptUI receiptUI = view.getReceiptUI();
+                                CreateReceiptController controller = new CreateReceiptController(receiptUI);
+                                controller.loadTable();
                             }
+
+                            String query3 = "UPDATE HMS " +
+                                    "SET quantity = quantity - ? " +
+                                    "WHERE hms_id = ?";
+                            try (PreparedStatement pstmt3 = connection.prepareStatement(query3)) {
+                                pstmt3.setInt(1, enteredQuantity);
+                                pstmt3.setString(2, maHMS);
+                                pstmt3.executeUpdate();
+                                loadSearchData();
+                            }
+
                         }
                     } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(view, "Vui lòng nhập số nguyên hợp lệ.");

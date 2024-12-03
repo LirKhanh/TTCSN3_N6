@@ -1,20 +1,23 @@
 package views.admin;
 
+import Utils.SetIconUtil;
 import controllers.admin.MenuAdminController;
+
 import javax.swing.*;
 
 public class MenuAdminUI extends JFrame {
-    private JButton btnManageColor, btnManageSize,btnManageCustomer,btnManageCategory,btnManagePayment,
-            btnManageStaff,btnManageDiscount,btnManageSupplier;
+    private JButton btnManageColor, btnManageSize, btnManageCustomer, btnManageCategory, btnManagePayment,
+            btnManageStaff, btnManageDiscount, btnManageSupplier;
+
     public MenuAdminUI() {
-        
-        setTitle("ADMIN Menu");
+
+        setTitle("Menu ADMIN");
         setSize(450, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
+        setIconImage(SetIconUtil.getIcon().getImage());
         setLayout(null);
-        
 
         btnManageColor = new JButton("Quản lý màu");
         btnManageColor.setBounds(100, 100, 230, 30);
@@ -32,8 +35,8 @@ public class MenuAdminUI extends JFrame {
         btnManageDiscount.setBounds(100, 400, 230, 30);
         btnManageSupplier = new JButton("Quản lý nhà cung cấp");
         btnManageSupplier.setBounds(100, 450, 230, 30);
-        
-        
+
+
         add(btnManageColor);
         add(btnManageSize);
         add(btnManageCustomer);
@@ -42,37 +45,44 @@ public class MenuAdminUI extends JFrame {
         add(btnManageStaff);
         add(btnManageDiscount);
         add(btnManageSupplier);
-        
-        
+
+
         MenuAdminController controller = new MenuAdminController(this);
 
     }
 
-    
+
     public void addManageColorListener(java.awt.event.ActionListener manageColorButton) {
         btnManageColor.addActionListener(manageColorButton);
     }
+
     public void addManageCustomerListener(java.awt.event.ActionListener manageCustomerButton) {
         btnManageCustomer.addActionListener(manageCustomerButton);
     }
+
     public void addManageSizeListener(java.awt.event.ActionListener manageSizeButton) {
         btnManageSize.addActionListener(manageSizeButton);
     }
+
     public void addManageCategoryListener(java.awt.event.ActionListener manageCategoryButton) {
         btnManageCategory.addActionListener(manageCategoryButton);
     }
+
     public void addManageStaffListener(java.awt.event.ActionListener manageStaffButton) {
         btnManageStaff.addActionListener(manageStaffButton);
     }
+
     public void addManagePaymentListener(java.awt.event.ActionListener managePaymentButton) {
         btnManagePayment.addActionListener(managePaymentButton);
     }
+
     public void addManageDiscountListener(java.awt.event.ActionListener manageDiscountButton) {
         btnManageDiscount.addActionListener(manageDiscountButton);
     }
+
     public void addManageSupplierListener(java.awt.event.ActionListener manageSupplierButton) {
         btnManageSupplier.addActionListener(manageSupplierButton);
     }
-    
-    
+
+
 }

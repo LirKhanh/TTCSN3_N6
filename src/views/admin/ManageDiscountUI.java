@@ -1,6 +1,8 @@
 
 package views.admin;
 
+import Utils.SetIconUtil;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JButton;
@@ -24,10 +26,11 @@ public class ManageDiscountUI extends JFrame {
         public ManageDiscountUI(MenuAdminUI menuAd) {
             this.menuAd = menuAd;
 
-            setTitle("Manage Discount");
+            setTitle("Quản lý đợt giảm giá");
             setSize(600, 500);
             setLocationRelativeTo(null);
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            setIconImage(SetIconUtil.getIcon().getImage());
             setLayout(null);
 
             lblMaDotGiamGia= new JLabel("Mã đợt giảm giá: ");

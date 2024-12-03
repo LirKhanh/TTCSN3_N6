@@ -1,6 +1,8 @@
 
 package views.admin;
 
+import Utils.SetIconUtil;
+
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -20,10 +22,11 @@ public class ManageCustomerUI extends JFrame {
     public ManageCustomerUI(MenuAdminUI menuAd) {
         this.menuAd = menuAd;
 
-        setTitle("Manage Customer");
+        setTitle("Quản lý khách hàng");
         setSize(800, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setIconImage(SetIconUtil.getIcon().getImage());
         setLayout(null);
 
         lblMaKhachHang= new JLabel("Mã khách hàng: ");
