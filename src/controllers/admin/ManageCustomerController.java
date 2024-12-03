@@ -1,14 +1,14 @@
 package controllers.admin;
 
 import Utils.ConnectJDBCUtil;
-import views.admin.ManageCustomerUI;
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import views.admin.ManageStaffUI;
+import views.admin.ManageCustomerUI;
 
 public class ManageCustomerController {
     private final ManageCustomerUI view;
@@ -21,7 +21,6 @@ public class ManageCustomerController {
         this.view.addCusButtonListener(e -> addStaff());
         this.view.deleteCusButtonListener(e -> deleteStaff());
         this.view.re_enterCusButtonListener(e -> re_enter());
-
         loadCus();
     }
     private void loadCus() {

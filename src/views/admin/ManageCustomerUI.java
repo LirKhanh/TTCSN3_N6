@@ -2,6 +2,8 @@
 package views.admin;
 
 import Utils.SetIconUtil;
+import controllers.admin.ManageCustomerController;
+import controllers.admin.ManageStaffController;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -103,7 +105,8 @@ public class ManageCustomerUI extends JFrame {
         add(btnNhapLai);
         add(scrollPane);
 
-        addWindowListener(new WindowCloseListener());
+        addWindowListener(new ManageCustomerUI.WindowCloseListener());
+        ManageCustomerController controller = new ManageCustomerController(this);
     }
 
     private class WindowCloseListener extends WindowAdapter {
