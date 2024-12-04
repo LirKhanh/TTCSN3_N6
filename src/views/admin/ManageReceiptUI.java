@@ -1,39 +1,48 @@
 package views.admin;
 
 import Utils.SetIconUtil;
-import controllers.admin.ManageSizeController;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.table.DefaultTableModel;
 
-public class ManageSizeUI extends JFrame {
+public class ManageReceiptUI extends JFrame{
     private MenuAdminUI menuAd;
 
-    private JLabel lblTen;
-    private JTextField jtfTen;
+    private JLabel lblProduct, lblColor,lblSize,lblSale,lblQuantity;
+    private JTextField jtfQuantity;
+    private JComboBox jcbProduct, jcbColor, jcbSize;
     private JButton btnThem, btnSua, btnXoa, btnNhapLai;
     private JTable table;
     private DefaultTableModel tableModel;
     private JScrollPane scrollPane;
 
-    public ManageSizeUI(MenuAdminUI menuAd) {
+    public ManageReceiptUI(MenuAdminUI menuAd){
         this.menuAd = menuAd;
 
-        setTitle("Quản lý kích cỡ");
+        setTitle("Quản lý hóa đơn");
         setSize(600, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(null);
         setIconImage(SetIconUtil.getIcon().getImage());
 
-        lblTen = new JLabel("Tên kích cỡ: ");
-        lblTen.setBounds(20, 50, 100, 30);
+        lblProduct = new JLabel("Tên hàng: ");
+        lblProduct.setBounds(20, 20, 100, 30);
+        jcbProduct = new JComboBox<String>();
+        jcbProduct.setBounds(120,20,100,30);
 
-        jtfTen = new JTextField();
-        jtfTen.setBounds(120, 50, 200, 30);
+        lblColor = new JLabel("Màu: ");
+        lblColor.setBounds(240, 20, 100, 30);
+        jcbColor = new JComboBox<String>();
+        jcbColor.setBounds(340,20,100,30);
+
+        lblSize = new JLabel("Kích cỡ: ");
+        lblSize.setBounds(460, 20, 100, 30);
+        jcbSize = new JComboBox<String>();
+        jcbSize.setBounds(560,20,100,30);
 
         btnThem = new JButton("Thêm");
         btnSua = new JButton("Sửa");
@@ -46,7 +55,6 @@ public class ManageSizeUI extends JFrame {
         btnXoa.setBounds(280, 150, 100, 30);
         btnNhapLai.setBounds(410, 150, 100, 30);
         btnNhapLai.addActionListener(e -> {
-            jtfTen.setText("");
         });
 
         scrollPane = new JScrollPane();
@@ -56,13 +64,12 @@ public class ManageSizeUI extends JFrame {
         scrollPane.setViewportView(table);
 
         String[] name = {
-                "Mã kích cỡ", "Tên kích cỡ"
+                "Mã HMS", "Tên hàng", "Màu", "Size","Số lượng "
         };
         tableModel = new DefaultTableModel(name, 0);
         table.setModel(tableModel);
 
-        add(lblTen);
-        add(jtfTen);
+        add(lblProduct);
         add(btnThem);
         add(btnSua);
         add(btnXoa);
@@ -70,7 +77,6 @@ public class ManageSizeUI extends JFrame {
         add(scrollPane);
 
         addWindowListener(new WindowCloseListener());
-        ManageSizeController controller = new ManageSizeController(this);
     }
 
     private class WindowCloseListener extends WindowAdapter {
@@ -92,9 +98,6 @@ public class ManageSizeUI extends JFrame {
         btnXoa.addActionListener(delButton);
     }
 
-    public JTextField getTxtName() {
-        return jtfTen;
-    }
 
     public DefaultTableModel getTableModel() {
         return (DefaultTableModel) table.getModel();
@@ -104,4 +107,3 @@ public class ManageSizeUI extends JFrame {
         return table;
     }
 }
-

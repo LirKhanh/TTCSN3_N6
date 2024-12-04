@@ -63,15 +63,15 @@ public class CreateReceiptUI extends JFrame {
         add(lblEmp);
 
         lblPayMethod = new JLabel("PTTT:");
-        lblPayMethod.setBounds(20, 460, 80, 20);
+        lblPayMethod.setBounds(260, 400, 80, 20);
         add(lblPayMethod);
 
         lblCustomer = new JLabel("Khách hàng:");
-        lblCustomer.setBounds(120, 400, 100, 20);
+        lblCustomer.setBounds(140, 400, 100, 20);
         add(lblCustomer);
 
         cmbPayMethod = new JComboBox<String>();
-        cmbPayMethod.setBounds(80, 460, 100, 20);
+        cmbPayMethod.setBounds(260, 430, 100, 20);
         cmbPayMethod.setBackground(Color.white);
         add(cmbPayMethod);
 
@@ -138,6 +138,18 @@ public class CreateReceiptUI extends JFrame {
 
     public String getCbBoxCustomer() {
         return cmbCustomer.getSelectedItem().toString();
+    }
+
+    public JComboBox<String> getCmbPayMethod() {
+        return cmbPayMethod;
+    }
+
+    public JComboBox<String> getCmbEmp() {
+        return cmbEmp;
+    }
+
+    public JComboBox<String> getCmbCustomer() {
+        return cmbCustomer;
     }
 
     public void setCbBoxPTTT(String PTTT) {

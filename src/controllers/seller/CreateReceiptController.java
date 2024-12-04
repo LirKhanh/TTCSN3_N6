@@ -166,6 +166,8 @@ public class CreateReceiptController {
 
     public void loadComboBoxPTTT() {
         String query1 = "SELECT * FROM PTTT ORDER BY pay_me_id";
+        view.getCmbPayMethod().removeAllItems();
+
         try (PreparedStatement pstmt = connection.prepareStatement(query1);
              ResultSet rs = pstmt.executeQuery()) {
             boolean hasData = false;
@@ -187,6 +189,8 @@ public class CreateReceiptController {
 
     public void loadComboBoxStaff() {
         String query2 = "SELECT * FROM NV";
+        view.getCmbEmp().removeAllItems();
+
         try (PreparedStatement pstmt = connection.prepareStatement(query2);
              ResultSet rs = pstmt.executeQuery()) {
 
@@ -213,6 +217,8 @@ public class CreateReceiptController {
 
     public void loadComboBoxCustomer() {
         String query3 = "SELECT * FROM KH";
+        view.getCmbCustomer().removeAllItems();
+
         try (PreparedStatement pstmt = connection.prepareStatement(query3);
              ResultSet rs = pstmt.executeQuery()) {
 

@@ -2,15 +2,8 @@ package controllers.admin;
 
 import Utils.ConnectJDBCUtil;
 import java.sql.*;
-import views.admin.ManageCategoryUI;
-import views.admin.ManageColorUI;
-import views.admin.ManageCustomerUI;
-import views.admin.ManageDiscountUI;
-import views.admin.ManagePaymentUI;
-import views.admin.ManageSizeUI;
-import views.admin.ManageStaffUI;
-import views.admin.ManageSupplierUI;
-import views.admin.MenuAdminUI;
+
+import views.admin.*;
 
 public class MenuAdminController {
 
@@ -30,9 +23,27 @@ public class MenuAdminController {
         this.view.addManagePaymentListener(e -> moveManagePayment());
         this.view.addManageDiscountListener(e -> moveManageDiscount());
         this.view.addManageSupplierListener(e -> moveManageSupplier());
+        this.view.addManageHmsListener(e -> moveManageHms());
+        this.view.addManageHmsOutListener(e -> moveManageHmsOut());
+        this.view.addManageReceiptListener(e -> moveManageReceipt());
 
     }
+    private void moveManageHms() {
+        ManageHMSUI hmsUI = new ManageHMSUI(view);
+        hmsUI.setVisible(true);
+        view.setVisible(false);
+    }
 
+    private void moveManageHmsOut() {
+        ManageSaleProductUI hmsOutUI = new ManageSaleProductUI(view);
+        hmsOutUI.setVisible(true);
+        view.setVisible(false);
+    }
+    private void moveManageReceipt(){
+        ManageReceiptUI receiptUI = new ManageReceiptUI(view);
+        receiptUI.setVisible(true);
+        view.setVisible(false);
+    }
     private void moveManageColor() {
         ManageColorUI colorUI = new ManageColorUI(view);
         colorUI.setVisible(true);
