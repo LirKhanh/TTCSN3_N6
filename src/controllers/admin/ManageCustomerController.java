@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import views.admin.ManageStaffUI;
 import views.admin.ManageCustomerUI;
 
 public class ManageCustomerController {

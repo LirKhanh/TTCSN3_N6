@@ -2,6 +2,7 @@
 package views.admin;
 
 import Utils.SetIconUtil;
+import java.awt.event.ActionListener;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -16,8 +17,8 @@ import javax.swing.table.DefaultTableModel;
 public class ManageDiscountUI extends JFrame {
         private MenuAdminUI menuAd;
     
-        private JLabel lblMaDotGiamGia, lblTenDotGiamGia,lblPhanTramGiamGia ;
-        private JTextField jtfMaDotGiamGia,jtfTenDotGiamGia,jtfPhanTramGiamGia;
+        private JLabel lblTenDotGiamGia,lblPhanTramGiamGia ;
+        private JTextField jtfTenDotGiamGia,jtfPhanTramGiamGia;
         private JButton btnThem,btnSua,btnXoa,btnNhapLai;
         private JTable table;
         private DefaultTableModel tableModel;
@@ -33,12 +34,10 @@ public class ManageDiscountUI extends JFrame {
             setIconImage(SetIconUtil.getIcon().getImage());
             setLayout(null);
 
-            lblMaDotGiamGia= new JLabel("Mã đợt giảm giá: ");
             lblTenDotGiamGia=new JLabel("Tên đợt giảm giá: ");
             lblPhanTramGiamGia=new JLabel("Phần trăm giảm giá: ");
             
             
-            jtfMaDotGiamGia=new JTextField();
             jtfTenDotGiamGia=new JTextField();
             jtfPhanTramGiamGia=new JTextField();
 
@@ -47,11 +46,9 @@ public class ManageDiscountUI extends JFrame {
             btnXoa=new JButton("Xóa");
             btnNhapLai=new JButton("Nhập lại");
 
-            lblMaDotGiamGia.setBounds(50, 50, 150, 30);
             lblTenDotGiamGia.setBounds(50, 100,150,30);
             lblPhanTramGiamGia.setBounds(50,150 ,150,30);
             
-            jtfMaDotGiamGia.setBounds(200, 50,200,30);
             jtfTenDotGiamGia.setBounds(200, 100,200,30);
             jtfPhanTramGiamGia.setBounds(200, 150, 200, 30);
 
@@ -61,7 +58,8 @@ public class ManageDiscountUI extends JFrame {
             btnNhapLai.setBounds(440,250,100,30);
 
             scrollPane= new JScrollPane();
-            scrollPane.setBounds(20,300,450,200);
+          //scrollPane.setBounds(20,300,450,200);
+            scrollPane.setBounds(20, 300, 550, 150);
             table=new JTable();
             scrollPane.add(table);
             scrollPane.setViewportView(table);
@@ -77,10 +75,8 @@ public class ManageDiscountUI extends JFrame {
 
     //        jtfMaMau.setBounds(50, )
 
-            add(lblMaDotGiamGia);
             add(lblTenDotGiamGia);
             add(lblPhanTramGiamGia);
-            add(jtfMaDotGiamGia);
             add(jtfTenDotGiamGia);
             add(jtfPhanTramGiamGia);
             add(btnThem);
@@ -98,5 +94,41 @@ public class ManageDiscountUI extends JFrame {
                 menuAd.setVisible(true); 
             }
         }
+       
+    public void addDisButtonListener(ActionListener addDisButton) {
+        btnThem.addActionListener(addDisButton);
+    }
+
+    public void updateDisButtonListener(ActionListener updateDisButton) {
+        btnSua.addActionListener(updateDisButton);
+    }
+
+    public void deleteDisButtonListener(ActionListener deleteDisButton) {
+        btnXoa.addActionListener(deleteDisButton);
+    }
+
+    public void re_enterCusButtonListener(ActionListener deleteDisButton) {
+        btnNhapLai.addActionListener(deleteDisButton);
+    }
+    // Getters for form inputs and table model
+    public JButton getBtnAddDiscount() {
+        return btnThem;
+    }
+
+    public JTextField getTxtName() {
+        return jtfTenDotGiamGia;
+    }
+
+    public JTextField getTxtPercent() {
+        return jtfPhanTramGiamGia;
+    }
+
+    public DefaultTableModel getTableModel() {
+        return (DefaultTableModel) table.getModel();
+    }
+
+    public JTable getTable() {
+        return table;  // Trả về đối tượng JTable
+    }
 }        
 
