@@ -4,7 +4,6 @@ package views.admin;
 import Utils.SetIconUtil;
 import controllers.admin.ManageCustomerController;
 import controllers.admin.ManageStaffController;
-
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;

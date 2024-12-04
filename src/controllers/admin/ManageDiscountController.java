@@ -17,11 +17,11 @@ import views.admin.ManageDiscountUI;
  *
  * @author Tuananh
  */
-public class ManagerDiscountController {
+public class ManageDiscountController {
     private final ManageDiscountUI view;
     private final Connection connection;
 
-    public ManagerDiscountController (ManageDiscountUI view) {
+    public ManageDiscountController (ManageDiscountUI view) {
         this.view = view;
         connection = ConnectJDBCUtil.getConnection();
         this.view.updateDisButtonListener(e -> updateDis());

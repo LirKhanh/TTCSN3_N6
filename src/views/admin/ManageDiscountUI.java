@@ -3,7 +3,7 @@ package views.admin;
 
 import Utils.SetIconUtil;
 import java.awt.event.ActionListener;
-
+import controllers.admin.ManageDiscountController;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JButton;
@@ -84,8 +84,10 @@ public class ManageDiscountUI extends JFrame {
             add(btnXoa);
             add(btnNhapLai);
             add(scrollPane);
+            
 
             addWindowListener(new WindowCloseListener());
+            ManageDiscountController controller = new ManageDiscountController(this);
         }
 
         private class WindowCloseListener extends WindowAdapter {
@@ -130,5 +132,6 @@ public class ManageDiscountUI extends JFrame {
     public JTable getTable() {
         return table;  // Trả về đối tượng JTable
     }
+    
 }        
 
