@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp64/www/TTCSN3_N6/src/views/admin/ManageCustomerUI.java</file>
-            <file>file:/C:/wamp64/www/TTCSN3_N6/src/controllers/admin/ManagerDiscountController.java</file>
-            <file>file:/C:/wamp64/www/TTCSN3_N6/src/views/admin/ManageDiscountUI.java</file>
-            <file>file:/C:/wamp64/www/TTCSN3_N6/src/controllers/admin/ManageCustomerController.java</file>
+            <file>file:/D:/TTCSN/TTCSN3_N6/src/views/LoginUI.java</file>
+            <file>file:/D:/TTCSN/TTCSN3_N6/src/controllers/seller/CreateReceiptController.java</file>
+            <file>file:/D:/TTCSN/TTCSN3_N6/src/Utils/SetIconUtil.java</file>
+            <file>file:/D:/TTCSN/TTCSN3_N6/src/views/seller/CreateReceiptUI.java</file>
+            <file>file:/D:/TTCSN/TTCSN3_N6/src/controllers/seller/MenuSellerController.java</file>
         </group>
     </open-files>
 </project-private>

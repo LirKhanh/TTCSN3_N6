@@ -73,6 +73,9 @@ public class CreateReceiptController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        view.getBtnPrintReceipt().setEnabled(false);
+        view.getBtnAddProduct().setEnabled(false);
+        view.getBtnDelProduct().setEnabled(false);
     }
 
     private void delProduct() {
@@ -263,17 +266,17 @@ public class CreateReceiptController {
             pstmt.setString(1, payMeId);
             pstmt.setString(2, cusId);
             pstmt.setString(3, staffId);
-            if (pstmt.executeUpdate() == 1) {
-                String query2 = "SELECT * FROM HD ORDER BY receipt_id DESC LIMIT 1";
-                try (PreparedStatement pstmt2 = connection.prepareStatement(query2)) {
-                    ResultSet rs = pstmt2.executeQuery();
-                    if (rs.next()) {
-                        String data = rs.getString("receipt_id");
-                        JOptionPane.showMessageDialog(view, "Tạo hóa đơn mới thành công:" + data);
-                        view.setLblReceiption(data);
-                    }
+            pstmt.executeUpdate();
+            String query2 = "SELECT * FROM HD ORDER BY receipt_id DESC LIMIT 1";
+            try (PreparedStatement pstmt2 = connection.prepareStatement(query2)) {
+                ResultSet rs = pstmt2.executeQuery();
+                if (rs.next()) {
+                    String data = rs.getString("receipt_id");
+                    JOptionPane.showMessageDialog(view, "Tạo hóa đơn mới thành công:" + data);
+                    view.setLblReceiption(data);
                 }
             }
+            view.getBtnCreateReceipt().setVisible(false);
             loadTable();
 
         } catch (SQLException e) {

@@ -1,8 +1,6 @@
 <component name="libraryTable">
-  <library name="TTCSN">
+  <library name="jdatepicker-1.3.4">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/dist/TTCSN.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../jars/mysql-connector-j-9.0.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../jdatepicker-1.3.4.jar!/" />
     </CLASSES>
     <JAVADOC />

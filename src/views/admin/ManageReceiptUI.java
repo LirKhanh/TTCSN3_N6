@@ -1,27 +1,34 @@
 package views.admin;
 
 import Utils.SetIconUtil;
+import controllers.admin.ManageReceiptController;
+import org.jdatepicker.impl.DateComponentFormatter;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
+import java.util.Properties;
+import java.util.Date;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
-public class ManageReceiptUI extends JFrame{
+
+public class ManageReceiptUI extends JFrame {
     private MenuAdminUI menuAd;
-
-    private JLabel lblProduct, lblColor,lblSize,lblSale,lblQuantity;
-    private JTextField jtfQuantity;
-    private JComboBox jcbProduct, jcbColor, jcbSize;
-    private JButton btnThem, btnSua, btnXoa, btnNhapLai;
+    private JLabel lblTotal, lblDate;
+    private JDatePickerImpl datePicker;
+    private JButton btnDetail, btnChart, btnDailyTotal;
     private JTable table;
     private DefaultTableModel tableModel;
     private JScrollPane scrollPane;
 
-    public ManageReceiptUI(MenuAdminUI menuAd){
+    public ManageReceiptUI(MenuAdminUI menuAd) {
         this.menuAd = menuAd;
-
         setTitle("Quản lý hóa đơn");
         setSize(600, 500);
         setLocationRelativeTo(null);
@@ -29,54 +36,56 @@ public class ManageReceiptUI extends JFrame{
         setLayout(null);
         setIconImage(SetIconUtil.getIcon().getImage());
 
-        lblProduct = new JLabel("Tên hàng: ");
-        lblProduct.setBounds(20, 20, 100, 30);
-        jcbProduct = new JComboBox<String>();
-        jcbProduct.setBounds(120,20,100,30);
 
-        lblColor = new JLabel("Màu: ");
-        lblColor.setBounds(240, 20, 100, 30);
-        jcbColor = new JComboBox<String>();
-        jcbColor.setBounds(340,20,100,30);
+        // Buttons
+        btnDetail = new JButton("Xem chi tiết hóa đơn");
+        btnChart = new JButton("Biểu đồ thống kê");
+        btnDailyTotal = new JButton("Xem đơn theo ngày");
 
-        lblSize = new JLabel("Kích cỡ: ");
-        lblSize.setBounds(460, 20, 100, 30);
-        jcbSize = new JComboBox<String>();
-        jcbSize.setBounds(560,20,100,30);
+        btnDetail.setBounds(20, 70, 150, 30);
+        btnChart.setBounds(180, 70, 150, 30);
+        btnDailyTotal.setBounds(240, 20, 150, 27);
 
-        btnThem = new JButton("Thêm");
-        btnSua = new JButton("Sửa");
-        btnXoa = new JButton("Xóa");
-        btnNhapLai = new JButton("Nhập lại");
-
-
-        btnThem.setBounds(20, 150, 100, 30);
-        btnSua.setBounds(150, 150, 100, 30);
-        btnXoa.setBounds(280, 150, 100, 30);
-        btnNhapLai.setBounds(410, 150, 100, 30);
-        btnNhapLai.addActionListener(e -> {
-        });
-
+        // Table
         scrollPane = new JScrollPane();
-        scrollPane.setBounds(20, 200, 550, 220);
+        scrollPane.setBounds(20, 120, 550, 300);
         table = new JTable();
-        scrollPane.add(table);
         scrollPane.setViewportView(table);
 
-        String[] name = {
-                "Mã HMS", "Tên hàng", "Màu", "Size","Số lượng "
+        String[] columns = {
+                "Mã hóa đơn", "Thời gian tạo", "Mã PTTT",
+                "Mã khách hàng", "Mã nhân viên", "Tổng tiền đơn"
         };
-        tableModel = new DefaultTableModel(name, 0);
+        tableModel = new DefaultTableModel(columns, 0);
         table.setModel(tableModel);
 
-        add(lblProduct);
-        add(btnThem);
-        add(btnSua);
-        add(btnXoa);
-        add(btnNhapLai);
+
+        lblTotal = new JLabel("Tổng:");
+        lblTotal.setBounds(432, 410, 100, 30);
+
+        lblDate = new JLabel("Lịch:");
+        lblDate.setBounds(20, 20, 60, 30);
+
+        UtilDateModel model = new UtilDateModel();
+        Properties p = new Properties();
+        p.put("text.today", "Hôm nay");
+        p.put("text.month", "Tháng");
+        p.put("text.year", "Năm");
+        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+        datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
+        datePicker.getComponent(0).setBackground(Color.WHITE);
+        datePicker.setBounds(80, 20, 150, 30);
+
+        add(lblTotal);
+        add(lblDate);
+        add(datePicker);
+        add(btnDetail);
+        add(btnChart);
+        add(btnDailyTotal);
         add(scrollPane);
 
         addWindowListener(new WindowCloseListener());
+        ManageReceiptController controller = new ManageReceiptController(this);
     }
 
     private class WindowCloseListener extends WindowAdapter {
@@ -85,25 +94,35 @@ public class ManageReceiptUI extends JFrame{
             menuAd.setVisible(true);
         }
     }
-
-    public void addButtonListener(ActionListener addButton) {
-        btnThem.addActionListener(addButton);
-    }
-
-    public void updateButtonListener(ActionListener updateButton) {
-        btnSua.addActionListener(updateButton);
-    }
-
-    public void delButtonListener(ActionListener delButton) {
-        btnXoa.addActionListener(delButton);
-    }
-
-
     public DefaultTableModel getTableModel() {
-        return (DefaultTableModel) table.getModel();
+        return tableModel;
     }
 
     public JTable getTable() {
         return table;
+    }
+
+    public JButton getBtnDetail() {
+        return btnDetail;
+    }
+
+    public JButton getBtnChart() {
+        return btnChart;
+    }
+
+    public JButton getBtnDailyTotal() {
+        return btnDailyTotal;
+    }
+    public void setLblTotal(String total){
+        lblTotal.setText(total);
+    }
+
+    public String getSelectedDate() {
+        Date selectedDate = (Date) datePicker.getModel().getValue();
+        if (selectedDate != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            return sdf.format(selectedDate);
+        }
+        return null;
     }
 }

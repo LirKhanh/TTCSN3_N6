@@ -168,4 +168,9 @@ public class CreateReceiptUI extends JFrame {
         lblReceipt.setVisible(true);
     }
     public JLabel getLblReceipt() {return lblReceipt;}
+
+    public JButton getBtnCreateReceipt() {return btnCreateReceipt;}
+    public JButton getBtnPrintReceipt() {return btnPrintReceipt;}
+    public JButton getBtnAddProduct() {return btnAddProduct;}
+    public JButton getBtnDelProduct() {return btnDelProduct;}
 }
