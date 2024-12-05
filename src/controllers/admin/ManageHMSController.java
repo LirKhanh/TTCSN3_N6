@@ -27,6 +27,8 @@ public class ManageHMSController {
         loadComboBoxSize();
         loadHms();
         view.addButtonListener(e -> addHmsOut());
+        view.updateButtonListener(e -> updateHms());
+        view.delButtonListener(e-> deleteHms());
     }
 
     private void loadComboBoxProduct() {
@@ -214,72 +216,132 @@ public class ManageHMSController {
     }
 
 
-//    private void updateSize() {
-//        String name = view.getTxtName().getText();
-//
-//        if (name.isEmpty()) {
-//            JOptionPane.showMessageDialog(view, "Vui lòng nhập đầy đủ thông tin!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-//            return;
-//        }
-//
-//        int selectedRow = view.getTable().getSelectedRow();
-//        if (selectedRow == -1) {
-//            JOptionPane.showMessageDialog(view, "Vui lòng chọn kích cỡ để cập nhật!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-//            return;
-//        }
-//        String sizeId = view.getTable().getValueAt(selectedRow, 0).toString();
-//        PreparedStatement stmt = null;
-//        try {
-//            String query = "UPDATE KC SET size_name = ? WHERE size_id = ?";
-//            stmt = connection.prepareStatement(query);
-//            stmt.setString(1, name);
-//            stmt.setString(2, sizeId);
-//
-//            int rowsUpdated = stmt.executeUpdate();
-//            if (rowsUpdated > 0) {
-//                JOptionPane.showMessageDialog(view, "Cập nhật kích cỡ thành công!");
-//                loadSizes();
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            JOptionPane.showMessageDialog(view, "Lỗi khi cập nhật kích cỡ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-//        } finally {
-//            try {
-//                if (stmt != null) stmt.close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-//
-//    public void deleteSize() {
-//        int selectedRow = view.getTable().getSelectedRow();
-//        if (selectedRow == -1) {
-//            JOptionPane.showMessageDialog(view, "Vui lòng chọn kích cỡ để xóa!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-//            return;
-//        }
-//        String sizeId = view.getTable().getValueAt(selectedRow, 0).toString();
-//        PreparedStatement stmt = null;
-//        try {
-//            String query = "DELETE FROM KC WHERE size_id = ?";
-//            stmt = connection.prepareStatement(query);
-//            stmt.setString(1, sizeId);
-//
-//            int rowsUpdated = stmt.executeUpdate();
-//            if (rowsUpdated > 0) {
-//                JOptionPane.showMessageDialog(view, "Xoá kích cỡ thành công!");
-//                loadSizes();
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            JOptionPane.showMessageDialog(view, "Lỗi khi xóa kích cỡ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-//        } finally {
-//            try {
-//                if (stmt != null) stmt.close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//    }
+    private void updateHms() {
+        String name = view.getJcbProduct().getSelectedItem().toString();
+        String color = view.getJcbColor().getSelectedItem().toString();
+        String size = view.getJcbSize().getSelectedItem().toString();
+        int quantity = 0;
+        try {
+            quantity = Integer.parseInt(view.getJtfQuantity());
+            if (quantity <= 0) {
+                JOptionPane.showMessageDialog(view, "Số lượng phải lớn hơn 0!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(view, "Số lượng phải là một số hợp lệ!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (name.isEmpty() || color.isEmpty() || size.isEmpty()) {
+            JOptionPane.showMessageDialog(view, "Vui lòng nhập đầy đủ thông tin!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+
+
+        int selectedRow = view.getTable().getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(view, "Vui lòng chọn hàng để cập nhật!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String hsmId = view.getTable().getValueAt(selectedRow, 0).toString();
+        PreparedStatement stmt = null;
+        
+        try {
+            String productId, colorId, sizeId;
+
+            String query1 = "SELECT product_id FROM HANG WHERE product_name = ?";
+            try (PreparedStatement pstmt = connection.prepareStatement(query1)) {
+                pstmt.setString(1, name);
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    productId = rs.getString("product_id");
+                } else {
+                    JOptionPane.showMessageDialog(view, "Sản phẩm không tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+            String query2 = "SELECT color_id FROM MAU WHERE color_name = ?";
+            try (PreparedStatement pstmt = connection.prepareStatement(query2)) {
+                pstmt.setString(1, color);
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    colorId = rs.getString("color_id");
+                } else {
+                    JOptionPane.showMessageDialog(view, "Màu không tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+            String query3 = "SELECT size_id FROM KC WHERE size_name = ?";
+            try (PreparedStatement pstmt = connection.prepareStatement(query3)) {
+                pstmt.setString(1, size);
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    sizeId = rs.getString("size_id");
+                } else {
+                    JOptionPane.showMessageDialog(view, "Kích cỡ không tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+            
+            String query = "UPDATE HMS SET size_id = ?,color_id = ?,product_id = ?,quantity = ? WHERE hms_id = ?";
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, sizeId);
+            stmt.setString(2, colorId);
+            stmt.setString(3, productId);
+            stmt.setString(4, String.valueOf(quantity));
+            stmt.setString(5, hsmId);
+            
+
+            int rowsUpdated = stmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(view, "Cập nhật hàng thành công!");
+                loadHms();
+                
+            
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(view, "Lỗi khi cập nhật hàng!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void deleteHms() {
+        int selectedRow = view.getTable().getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(view, "Vui lòng chọn hàng để xóa!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String hmsId = view.getTable().getValueAt(selectedRow, 0).toString();
+        PreparedStatement stmt = null;
+        try {
+            String query = "DELETE FROM HMS WHERE hms_id = ?";
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, hmsId);
+
+            int rowsUpdated = stmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(view, "Xoá hàng thành công!");
+                loadHms();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(view, "Lỗi khi xóa hàng!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 }

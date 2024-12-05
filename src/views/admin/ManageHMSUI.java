@@ -127,7 +127,7 @@ public class ManageHMSUI extends JFrame {
     public JTable getTable() {
         return table;
     }
-
+    
     public void setJcbProduct(String jcbProductItem) {
         jcbProduct.addItem(jcbProductItem);
     }
