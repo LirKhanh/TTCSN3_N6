@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import Utils.ConnectJDBCUtil;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import views.admin.ManageSaleProductUI;
 
 public class ManageSaleProductController {
@@ -26,6 +28,7 @@ public class ManageSaleProductController {
         loadComboBoxSale();
         loadHmsOut();
         view.addButtonListener(e -> addHmsOut());
+        view.delButtonListener(e -> deleteHmsOut()); 
     }
 
     private void loadComboBoxHMS() {
@@ -157,72 +160,50 @@ public class ManageSaleProductController {
     }
 
 
-//    private void updateSize() {
-//        String name = view.getTxtName().getText();
-//
-//        if (name.isEmpty()) {
-//            JOptionPane.showMessageDialog(view, "Vui lòng nhập đầy đủ thông tin!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-//            return;
-//        }
-//
-//        int selectedRow = view.getTable().getSelectedRow();
-//        if (selectedRow == -1) {
-//            JOptionPane.showMessageDialog(view, "Vui lòng chọn kích cỡ để cập nhật!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-//            return;
-//        }
-//        String sizeId = view.getTable().getValueAt(selectedRow, 0).toString();
-//        PreparedStatement stmt = null;
-//        try {
-//            String query = "UPDATE KC SET size_name = ? WHERE size_id = ?";
-//            stmt = connection.prepareStatement(query);
-//            stmt.setString(1, name);
-//            stmt.setString(2, sizeId);
-//
-//            int rowsUpdated = stmt.executeUpdate();
-//            if (rowsUpdated > 0) {
-//                JOptionPane.showMessageDialog(view, "Cập nhật kích cỡ thành công!");
-//                loadSizes();
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            JOptionPane.showMessageDialog(view, "Lỗi khi cập nhật kích cỡ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-//        } finally {
-//            try {
-//                if (stmt != null) stmt.close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-//
-//    public void deleteSize() {
-//        int selectedRow = view.getTable().getSelectedRow();
-//        if (selectedRow == -1) {
-//            JOptionPane.showMessageDialog(view, "Vui lòng chọn kích cỡ để xóa!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-//            return;
-//        }
-//        String sizeId = view.getTable().getValueAt(selectedRow, 0).toString();
-//        PreparedStatement stmt = null;
-//        try {
-//            String query = "DELETE FROM KC WHERE size_id = ?";
-//            stmt = connection.prepareStatement(query);
-//            stmt.setString(1, sizeId);
-//
-//            int rowsUpdated = stmt.executeUpdate();
-//            if (rowsUpdated > 0) {
-//                JOptionPane.showMessageDialog(view, "Xoá kích cỡ thành công!");
-//                loadSizes();
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            JOptionPane.showMessageDialog(view, "Lỗi khi xóa kích cỡ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-//        } finally {
-//            try {
-//                if (stmt != null) stmt.close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//    }
+    public void deleteHmsOut() {
+        int selectedRow1 = view.getTable().getSelectedRow();
+        int selectedRow2 = view.getTable().getSelectedRow();
+        if (selectedRow1 == -1 || selectedRow2 == -1 ) {
+            JOptionPane.showMessageDialog(view, "Vui lòng chọn hàng bán ra để xóa!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String hmsId = view.getTable().getValueAt(selectedRow1, 0).toString();
+        String sale = view.getTable().getValueAt(selectedRow2, 5).toString();
+        
+        PreparedStatement stmt = null;
+        try { 
+            String saleId;
+            String query4 = "SELECT sale_id FROM DGG WHERE sale_name = ?";
+            try (PreparedStatement pstmt = connection.prepareStatement(query4)) {
+                pstmt.setString(1, sale);
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    saleId = rs.getString("sale_id");
+                } else {
+                    JOptionPane.showMessageDialog(view, "Đợt giảm giá không tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+            String query = "DELETE FROM HBR WHERE hms_id = ? and sale_id = ?";
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, hmsId);
+            stmt.setString(2, saleId);
+
+            int rowsUpdated = stmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(view, "Xoá kích cỡ thành công!");
+                loadHmsOut();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(view, "Lỗi khi xóa kích cỡ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 }
