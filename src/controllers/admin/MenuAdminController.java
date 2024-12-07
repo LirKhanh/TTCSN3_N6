@@ -10,7 +10,7 @@ import views.admin.ManagePaymentUI;
 import views.admin.ManageSizeUI;
 import views.admin.ManageStaffUI;
 import views.admin.ManageSupplierUI;
-import views.admin.ManageProductUI; // Thêm import cho ManageProductUI
+import views.admin.ManageProductUI; 
 import views.admin.MenuAdminUI;
 
 public class MenuAdminController {
@@ -30,7 +30,7 @@ public class MenuAdminController {
         this.view.addManagePaymentListener(e -> moveManagePayment());
         this.view.addManageDiscountListener(e -> moveManageDiscount());
         this.view.addManageSupplierListener(e -> moveManageSupplier());
-        this.view.addManageProductListener(e -> moveManageProduct()); // Thêm sự kiện cho quản lý 
+        this.view.addManageProductListener(e -> moveManageProduct());
     }
 
     private void moveManageColor() {
