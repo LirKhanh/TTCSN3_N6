@@ -13,9 +13,9 @@ import java.awt.event.WindowEvent;
 public class ManageProductUI extends JFrame {
     private MenuAdminUI menuAd;
 
-    private JLabel lblMaHang, lblTenHang, lblNhaCungCap, lblLoaiHang, lblViTri, lblGia, lblNhanHang;
+    private JLabel lblTenHang, lblNhaCungCap, lblLoaiHang, lblViTri, lblGia, lblNhanHang;
     private JTextField jtfTenHang, jtfViTri, jtfGia, jtfNhanHang;
-    private JComboBox<String> jcbMaNCC, jcbMaLoaiHang;
+    private JComboBox<String> jcbNCC, jcbLoaiHang;
     private JButton btnThem, btnSua, btnXoa;
     private JTable table;
     private DefaultTableModel tableModel;
@@ -31,23 +31,22 @@ public class ManageProductUI extends JFrame {
         setLayout(null);
         setIconImage(SetIconUtil.getIcon().getImage());
 
-        lblMaHang = new JLabel("Mã sản phẩm: ");
-        lblMaHang.setBounds(20, 20, 120, 20);
-
         lblTenHang = new JLabel("Tên sản phẩm: ");
         lblTenHang.setBounds(20, 50, 120, 20);
         jtfTenHang = new JTextField();
         jtfTenHang.setBounds(150, 50, 200, 20);
 
-        lblNhaCungCap = new JLabel("Mã nhà cung cấp: ");
+        lblNhaCungCap = new JLabel("Nhà cung cấp: ");
         lblNhaCungCap.setBounds(20, 80, 120, 20);
-        jcbMaNCC = new JComboBox<>();
-        jcbMaNCC.setBounds(150, 80, 200, 20);
+        jcbNCC = new JComboBox<>();
+        jcbNCC.setBounds(150, 80, 200, 20);
+        jcbNCC.setBackground(Color.WHITE);
 
-        lblLoaiHang = new JLabel("Mã loại hàng: ");
+        lblLoaiHang = new JLabel("Loại hàng: ");
         lblLoaiHang.setBounds(20, 110, 120, 20);
-        jcbMaLoaiHang = new JComboBox<>();
-        jcbMaLoaiHang.setBounds(150, 110, 200, 20);
+        jcbLoaiHang = new JComboBox<>();
+        jcbLoaiHang.setBounds(150, 110, 200, 20);
+        jcbLoaiHang.setBackground(Color.WHITE);
 
         lblViTri = new JLabel("Vị trí: ");
         lblViTri.setBounds(20, 140, 120, 20);
@@ -86,7 +85,6 @@ public class ManageProductUI extends JFrame {
         tableModel = new DefaultTableModel(columns, 0);
         table.setModel(tableModel);
 
-        add(lblMaHang);
         add(lblTenHang);
         add(lblNhaCungCap);
         add(lblLoaiHang);
@@ -94,8 +92,8 @@ public class ManageProductUI extends JFrame {
         add(lblGia);
         add(lblNhanHang);
         add(jtfTenHang);
-        add(jcbMaNCC);
-        add(jcbMaLoaiHang);
+        add(jcbNCC);
+        add(jcbLoaiHang);
         add(jtfViTri);
         add(jtfGia);
         add(jtfNhanHang);
@@ -136,20 +134,20 @@ public class ManageProductUI extends JFrame {
         return table;
     }
 
-    public void setJcbMaNCC(String item) {
-        jcbMaNCC.addItem(item);
+    public void setJcbNCC(String item) {
+        jcbNCC.addItem(item);
     }
 
-    public void setJcbMaLoaiHang(String item) {
-        jcbMaLoaiHang.addItem(item);
+    public void setJcbLoaiHang(String item) {
+        jcbLoaiHang.addItem(item);
     }
 
-    public JComboBox<String> getJcbMaNCC() {
-        return jcbMaNCC;
+    public JComboBox<String> getJcbNCC() {
+        return jcbNCC;
     }
 
-    public JComboBox<String> getJcbMaLoaiHang() {
-        return jcbMaLoaiHang;
+    public JComboBox<String> getJcbLoaiHang() {
+        return jcbLoaiHang;
     }
 
     public JTextField getTxtTenHang() {

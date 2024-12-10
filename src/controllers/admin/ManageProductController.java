@@ -2,6 +2,7 @@ package controllers.admin;
 
 import Utils.ConnectJDBCUtil;
 import views.admin.ManageProductUI;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
@@ -25,16 +26,15 @@ public class ManageProductController {
         view.delButtonListener(e -> deleteProduct());
     }
 
-    // Load data for Mã nhà cung cấp (Supplier) combo box
     private void loadComboBoxNCC() {
         String query = "SELECT * FROM NCC ORDER BY sup_id";
-        view.getJcbMaNCC().removeAllItems();
+        view.getJcbNCC().removeAllItems();
 
         try (PreparedStatement pstmt = connection.prepareStatement(query);
              ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
-                String value = rs.getString("sup_id");
-                view.setJcbMaNCC(value);
+                String value = rs.getString("sup_name");
+                view.setJcbNCC(value);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -45,13 +45,13 @@ public class ManageProductController {
     // Load data for Mã loại hàng (Product Type) combo box
     private void loadComboBoxLoaiHang() {
         String query = "SELECT * FROM LH ORDER BY type_id";
-        view.getJcbMaLoaiHang().removeAllItems();
+        view.getJcbLoaiHang().removeAllItems();
 
         try (PreparedStatement pstmt = connection.prepareStatement(query);
              ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
-                String value = rs.getString("type_id");
-                view.setJcbMaLoaiHang(value);
+                String value = rs.getString("type_name");
+                view.setJcbLoaiHang(value);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -59,7 +59,6 @@ public class ManageProductController {
         }
     }
 
-    // Load the products from the database and display them in the table
     private void loadProductData() {
         String query = "SELECT * FROM HANG";
         try (PreparedStatement pstmt = connection.prepareStatement(query);
@@ -88,17 +87,40 @@ public class ManageProductController {
     private void addProduct() {
         String productId = view.getTxtTenHang().getText();
         String productName = view.getTxtTenHang().getText();
-        String supplierId = view.getJcbMaNCC().getSelectedItem().toString();
-        String typeId = view.getJcbMaLoaiHang().getSelectedItem().toString();
+        String supplierName = view.getJcbNCC().getSelectedItem().toString();
+        String typeName = view.getJcbLoaiHang().getSelectedItem().toString();
         String location = view.getTxtViTri().getText();
         double price = Double.parseDouble(view.getTxtGia().getText());
         String brand = view.getTxtNhanHang().getText();
-
+        String supplierId = "";
+        String typeId = "";
         if (productId.isEmpty() || productName.isEmpty() || location.isEmpty() || price == 0) {
             JOptionPane.showMessageDialog(view, "Vui lòng nhập đầy đủ thông tin!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
+        String query1 = "SELECT sup_id FROM NCC WHERE sup_name = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(query1)) {
+            pstmt.setString(1, supplierName);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                supplierId = rs.getString("sup_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(view, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+        String query2 = "SELECT type_id FROM LH WHERE type_name = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(query2)) {
+            pstmt.setString(1, typeName);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                typeId = rs.getString("type_id");
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(view, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
         String query = "INSERT INTO HANG (product_id, product_name, sup_id, type_id, location, price, brand) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
             pstmt.setString(1, productId);
@@ -122,7 +144,6 @@ public class ManageProductController {
         }
     }
 
-    // Update an existing product
     private void updateProduct() {
         int selectedRow = view.getTable().getSelectedRow();
         if (selectedRow == -1) {
@@ -132,12 +153,39 @@ public class ManageProductController {
 
         String productId = view.getTable().getValueAt(selectedRow, 0).toString();
         String productName = view.getTxtTenHang().getText();
-        String supplierId = view.getJcbMaNCC().getSelectedItem().toString();
-        String typeId = view.getJcbMaLoaiHang().getSelectedItem().toString();
+        String supplierName = view.getJcbNCC().getSelectedItem().toString();
+        String typeName = view.getJcbLoaiHang().getSelectedItem().toString();
         String location = view.getTxtViTri().getText();
         double price = Double.parseDouble(view.getTxtGia().getText());
         String brand = view.getTxtNhanHang().getText();
-
+        String supplierId = "";
+        String typeId = "";
+        if (productId.isEmpty() || productName.isEmpty() || location.isEmpty() || price == 0) {
+            JOptionPane.showMessageDialog(view, "Vui lòng nhập đầy đủ thông tin!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String query1 = "SELECT sup_id FROM NCC WHERE sup_name = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(query1)) {
+            pstmt.setString(1, supplierName);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                supplierId = rs.getString("sup_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(view, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+        String query2 = "SELECT type_id FROM LH WHERE type_name = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(query2)) {
+            pstmt.setString(1, typeName);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                typeId = rs.getString("type_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(view, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
         String query = "UPDATE HANG SET product_name = ?, sup_id = ?, type_id = ?, location = ?, price = ?, brand = ? WHERE product_id = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
             pstmt.setString(1, productName);

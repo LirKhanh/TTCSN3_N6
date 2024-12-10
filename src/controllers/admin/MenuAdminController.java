@@ -2,16 +2,8 @@ package controllers.admin;
 
 import Utils.ConnectJDBCUtil;
 import java.sql.*;
-import views.admin.ManageCategoryUI;
-import views.admin.ManageColorUI;
-import views.admin.ManageCustomerUI;
-import views.admin.ManageDiscountUI;
-import views.admin.ManagePaymentUI;
-import views.admin.ManageSizeUI;
-import views.admin.ManageStaffUI;
-import views.admin.ManageSupplierUI;
-import views.admin.ManageProductUI; 
-import views.admin.MenuAdminUI;
+
+import views.admin.*;
 
 public class MenuAdminController {
 
@@ -31,6 +23,27 @@ public class MenuAdminController {
         this.view.addManageDiscountListener(e -> moveManageDiscount());
         this.view.addManageSupplierListener(e -> moveManageSupplier());
         this.view.addManageProductListener(e -> moveManageProduct());
+        this.view.addManageHms(e -> moveManageHms());
+        this.view.addManageSaleProduct(e -> moveManageSaleProduct());
+        this.view.addManageReceipt(e -> moveManageReceipt());
+    }
+
+    private void moveManageHms(){
+        ManageHMSUI manageHMSUI = new ManageHMSUI(view);
+        manageHMSUI.setVisible(true);
+        view.setVisible(false);
+    }
+
+    private void moveManageSaleProduct(){
+        ManageSaleProductUI manageSaleProductUI = new ManageSaleProductUI(view);
+        manageSaleProductUI.setVisible(true);
+        view.setVisible(false);
+    }
+
+    private void moveManageReceipt(){
+        ManageReceiptUI manageReceiptUI = new ManageReceiptUI(view);
+        manageReceiptUI.setVisible(true);
+        view.setVisible(false);
     }
 
     private void moveManageColor() {
