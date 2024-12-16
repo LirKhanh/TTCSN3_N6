@@ -89,7 +89,7 @@ public class CreateReceiptUI extends JFrame {
         btnCreateReceipt.setBounds(100, 500, 120, 40);
         add(btnCreateReceipt);
 
-        btnPrintReceipt = new JButton("In hóa đơn");
+        btnPrintReceipt = new JButton("Xuất đơn hàng");
         btnPrintReceipt.setBounds(240, 500, 120, 40);
         add(btnPrintReceipt);
 

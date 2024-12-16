@@ -6,6 +6,8 @@ import java.sql.*;
 import views.admin.MenuAdminUI;
 import views.seller.MenuSellerUI;
 
+import javax.swing.*;
+
 public class LoginController {
 
     private LoginUI view;
@@ -27,34 +29,54 @@ public class LoginController {
         String username = view.getUsername();
         String password = view.getPassword();
 
+        String queryCheckEmpty = "SELECT COUNT(*) AS count FROM NV";
+        String queryInsertDefault = "INSERT INTO NV (acc, pass, stat, staff_name) VALUES (?, ?, ?, ?)";
         String query = "SELECT * FROM NV WHERE acc = ? AND pass = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, username);
-            stmt.setString(2, password);
-            ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()) {
-                String staffId = rs.getString("staff_id");
-                String staffName = rs.getString("staff_name");
-                boolean stat = rs.getBoolean("stat");
-
-                if (stat) {
-                    MenuAdminUI adminUI = new MenuAdminUI();
-                    adminUI.setVisible(true);
-                    view.setVisible(false);
-                } else {
-                    MenuSellerUI menuSellerUI = new MenuSellerUI();
-                    menuSellerUI.setVisible(true);
-                    view.setVisible(false);
+        try {
+            try (PreparedStatement stmtCheck = connection.prepareStatement(queryCheckEmpty)) {
+                ResultSet rsCheck = stmtCheck.executeQuery();
+                if (rsCheck.next() && rsCheck.getInt("count") == 0) {
+                    try (PreparedStatement stmtInsert = connection.prepareStatement(queryInsertDefault)) {
+                        stmtInsert.setString(1, username);
+                        stmtInsert.setString(2, password);
+                        stmtInsert.setBoolean(3, true);
+                        stmtInsert.setString(4, "Default Admin");
+                        stmtInsert.executeUpdate();
+                        JOptionPane.showMessageDialog(view,"Danh sách tài khoản rỗng, tạo tài khoản admin thành công!\nTài khoản:"+username+"\nMật khẩu:"+password);
+                    }
                 }
-            } else {
-                view.setMessage("Invalid username or password.");
+            }
+
+            try (PreparedStatement stmt = connection.prepareStatement(query)) {
+                stmt.setString(1, username);
+                stmt.setString(2, password);
+                ResultSet rs = stmt.executeQuery();
+
+                if (rs.next()) {
+                    String staffId = rs.getString("staff_id");
+                    String staffName = rs.getString("staff_name");
+                    boolean stat = rs.getBoolean("stat");
+
+                    if (stat) {
+                        MenuAdminUI adminUI = new MenuAdminUI();
+                        adminUI.setVisible(true);
+                        view.setVisible(false);
+                    } else {
+                        MenuSellerUI menuSellerUI = new MenuSellerUI();
+                        menuSellerUI.setVisible(true);
+                        view.setVisible(false);
+                    }
+                } else {
+                    view.setMessage("Tài khoản không hợp lệ.");
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
             view.setMessage("Error: " + e.getMessage());
         }
     }
+
 
     private void addKeyListenerForLogin() {
         view.getTxtUsername().addKeyListener(new java.awt.event.KeyAdapter() {
